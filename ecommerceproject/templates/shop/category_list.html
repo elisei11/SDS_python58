@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} List Categories {% endblock %}
+
+{% block content %}
+   
+<div class="container-fluid">
+    <div class="row">
+        {% for category in categories %}
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ category.image.url }}" class="card-img-top " alt="{{ category.name }}">
+                <div class="card-body">
+                    <p class="card-text">{{ category.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

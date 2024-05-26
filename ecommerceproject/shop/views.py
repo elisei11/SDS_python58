@@ -1,10 +1,10 @@
-from django.shortcuts import render
+
 from django.urls import reverse_lazy
 
 from django.views.generic import CreateView, ListView
 
-from ecommerceproject.shop.forms import CategoryForm
-from ecommerceproject.shop.models import Category
+from .forms import CategoryForm
+from .models import Category
 
 
 class CategoryCreateView(CreateView):

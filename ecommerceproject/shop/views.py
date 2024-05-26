@@ -1,7 +1,7 @@
 
 from django.urls import reverse_lazy
 
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, TemplateView
 
 from .forms import CategoryForm
 from .models import Category
@@ -18,4 +18,7 @@ class CategoryListView(ListView):
     template_name = 'shop/category_list.html'
     model = Category
     context_object_name = 'categories'
+
+class HomeView(TemplateView):
+    template_name = 'homepage.html'
 

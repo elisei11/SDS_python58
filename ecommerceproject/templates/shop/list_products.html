@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}List of products{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for product in products %}
+                
+                <div class="col-md-3">
+                    
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.category }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <a href="" class="btn btn-primary">Go to somewhere</a>
+                        </div>
+                    </div>
+                    
+                </div>
+               
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+    

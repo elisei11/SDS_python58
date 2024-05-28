@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %} List Categories {% endblock %}
+{% block title %}Categori produse{% endblock %}
 
 {% block content %}
-   
-<div class="container-fluid">
+    <div class="container-fluid">
     <div class="row">
         {% for category in categories %}
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-                <img src="{{ category.image.url }}" class="card-img-top " alt="{{ category.name }}">
-                <div class="card-body">
-                    <p class="card-text">{{ category.description }}</p>
+        <div class="card" style="width: 18rem;">
+                    <img src="{{ category.image.url }}" class="card-img-top" alt="{{ category.name }}">
+                    <div class="card-body">
+{#                        <h5 class="card-title">{{ category.name }}</h5>#}
+                        <p class="card-text">{{ category.description }}</p>
+                        <a href="{% url 'shop:product-list' %}" class="btn btn-primary">Go to {{ category.name }}</a>
+                    </div>
                 </div>
-            </div>
-        </div>
         {% endfor %}
     </div>
 </div>

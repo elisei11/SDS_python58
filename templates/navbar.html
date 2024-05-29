@@ -38,6 +38,25 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+        
+             {% if customer.is_authenticated %}
+             <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-primary">Logout, {{ customer.username }}</button>
+                </form>
+            {% else %}
+                <div>
+                    <a href="{% url 'login' %}" class="btn btn-outline-warning">Login</a>
+                    <a href="{% url 'shop:customer-create' %}" class="btn btn-outline-secondary">Sign up</a>
+                </div>
+            {% endif %}
+            <form class="d-flex" method=POST action="#">
+                {% csrf_token %}
+
+                <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="searched">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
         </div>
     </div>
 </nav>
+       

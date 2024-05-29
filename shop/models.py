@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -32,3 +33,18 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+# class Customer(models.Model):
+#     first_name = models.CharField(max_length=50)
+#     last_name = models.CharField(max_length=50)
+#     username = models.CharField(max_length=10, unique=True)
+#     email = models.EmailField()
+#     phone_number = models.CharField(max_length=15)
+#
+#     class Meta:
+#         ordering = ['user']
+#         verbose_name = 'customer'
+#         verbose_name_plural = 'customers'
+#
+#     def __str__(self):
+#         return self.user.username

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 
 from django.views.generic import CreateView, ListView, TemplateView, DetailView
@@ -28,6 +29,21 @@ class ListProductView(ListView):
     template_name = 'product/product_list.html'
     model = Product
     context_object_name = 'products'
+
+    def product_list(request, category_slug=None):
+        category = None
+        categories = Category.objects.all()
+        products = Product.objects.all()
+
+        if category_slug:
+            category = get_object_or_404(Category, slug=category_slug)
+            products = products.filter(category=category)
+
+        return render(request, 'product/product_list.html', {
+            'category': category,
+            'categories': categories,
+            'products': products
+        })
 
 class ProductDetailView(DetailView):
     template_name = 'product/product_detail.html'

@@ -3,24 +3,28 @@
 {% block title %} Product Details {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="my-4">{{ product.name }}</h1>
-    <div class="row">
-        <div class="col-md-6">
-            {% if product.image %}
-            <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
-            {% endif %}
-        </div>
-        <div class="col-md-6">
-            <h3 class="my-3">Description</h3>
-            <p>{{ product.description }}</p>
-            <h3 class="my-3">Details</h3>
-            <ul>
-                <li>Price: ${{ product.price }}</li>
-                <li>Stock: {{ product.stock }}</li>
-            </ul>
-{#            <a href="{% url 'shop:cart-detail' product.pk %}" class="btn btn-success">Add to Cart</a>#}
+    <div class="container">
+        <h1 class="my-4">{{ product.name }}</h1>
+        <div class="row">
+            <div class="col-md-6">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <h3 class="my-3">Description</h3>
+                <p>{{ product.description }}</p>
+                <h3 class="my-3">Details</h3>
+                <ul>
+                    <li>Price: ${{ product.price }}</li>
+                    <li>Stock: {{ product.stock }}</li>
+                </ul><a href="{% url 'shop:product-detail' product.id %}" class="btn btn-primary">Go somewhere</a>
+{#                <form method="post" action="{% url 'add_to_cart' %}" class="add-to-cart-form">#}
+{#                    {% csrf_token %}#}
+{#                    {{ form.as_p }}#}
+{#                    <button type="submit">Add to Cart</button>#}
+{#                </form>#}
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

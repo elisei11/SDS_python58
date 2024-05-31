@@ -12,7 +12,18 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text">{{ product.description }}</p>
-                            <a href="{% url 'shop:product-detail' product.slug  %}" class="btn btn-primary">View Details</a>
+                            <!-- Form for adding the product to the cart -->
+                            <form method="post" action="{% url 'shop:add_to_cart' product.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <div class="input-group mb-3">
+                                    <input type="number" name="quantity" class="form-control" value="1" min="1">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <a href="{% url 'shop:product-detail' product.id  %}" class="btn btn-secondary">View Details</a>
                         </div>
                     </div>
                 </div>

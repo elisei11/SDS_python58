@@ -21,7 +21,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/')
     slug = models.SlugField(max_length=50, unique=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name='products')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     description = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
     stock = models.PositiveIntegerField(default=0)
@@ -34,17 +34,21 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-# class Customer(models.Model):
-#     first_name = models.CharField(max_length=50)
-#     last_name = models.CharField(max_length=50)
-#     username = models.CharField(max_length=10, unique=True)
-#     email = models.EmailField()
-#     phone_number = models.CharField(max_length=15)
-#
-#     class Meta:
-#         ordering = ['user']
-#         verbose_name = 'customer'
-#         verbose_name_plural = 'customers'
-#
-#     def __str__(self):
-#         return self.user.username
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    crated_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return f'Cart of {self.user.username}'
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return f'{self.quantity} x {self.product.name}'

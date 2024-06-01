@@ -4,14 +4,15 @@
 <div class="cart-container">
     <h2>Your Cart</h2>
     <div class="cart-items">
-        {% for item in cart_items %}
+        {% for item in carts %}
         <div class="cart-item">
             <div class="cart-item-info">
                 <p>Product: {{ item.product.name }}</p>
+                 <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                 <p>Quantity: {{ item.quantity }}</p>
             </div>
             <div class="cart-item-actions">
-                <form method="post" action="{% url 'remove_from_cart' item.id %}">
+                <form method="post" action="{% url 'shop:remove-from-cart' pk=5%}">
                     {% csrf_token %}
                     <button type="submit">Remove</button>
                 </form>
@@ -20,11 +21,11 @@
         {% endfor %}
     </div>
 
-    <h2>Add Item to Cart</h2>
-    <form method="post" action="{% url 'add_to_cart' %}" class="add-to-cart-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add to Cart</button>
-    </form>
+{#    <h2>Add Item to Cart</h2>#}
+{#    <form method="post" action="{% url 'shop:add_to_cart' pk=6 %}" class="add-to-cart-form">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit">Add to Cart</button>#}
+{#    </form>#}
 </div>
 {% endblock %}

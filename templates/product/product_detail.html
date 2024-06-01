@@ -19,11 +19,11 @@
                     <li>Price: ${{ product.price }}</li>
                     <li>Stock: {{ product.stock }}</li>
                 </ul><a href="{% url 'shop:product-detail' product.id %}" class="btn btn-primary">Go somewhere</a>
-{#                <form method="post" action="{% url 'add_to_cart' %}" class="add-to-cart-form">#}
-{#                    {% csrf_token %}#}
-{#                    {{ form.as_p }}#}
-{#                    <button type="submit">Add to Cart</button>#}
-{#                </form>#}
+                <form method="post" action="{% url 'add_to_cart' %}" class="add-to-cart-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Add to Cart</button>
+                </form>
             </div>
         </div>
     </div>

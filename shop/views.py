@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_http_methods
 
-from django.views.generic import CreateView, ListView, TemplateView, DetailView, View
+from django.views.generic import CreateView, ListView, TemplateView, DetailView, View, DeleteView
 
 from .forms import CategoryForm, UserForm
 from .models import Category, Product, CartItem, Cart
@@ -21,8 +23,11 @@ class CategoryListView(ListView):
     context_object_name = 'categories'
 
 
-class HomeView(TemplateView):
+class HomeView(ListView):
     template_name = 'homepage.html'
+    model = Product
+    context_object_name = 'products'
+
 
 
 class ListProductView(ListView):
@@ -74,6 +79,7 @@ class CreateCustomerView(CreateView):
 class CartView(ListView):
     model = CartItem
     template_name = 'cart/view_cart.html'
+    context_object_name = 'carts'
 
     def get_queryset(self):
         cart, created = Cart.objects.get_or_create(user=self.request.user)
@@ -87,19 +93,46 @@ class CartView(ListView):
 
 class AddToCartView(View):
 
-    def post(self, request, product_id):
-        product = get_object_or_404(Product, id=product_id)
-        cart, created = Cart.objects.get_or_create(user=request.user)
-        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-        if not created:
-            cart_item.quantity += 1
-            cart_item.save()
-        return redirect('view_cart')
+    def post(self, request, pk):
+        cart = request.session.get('cart', {})
+        if pk in cart:
+            cart[pk] += 1  # Crește cantitatea dacă produsul este deja în coș
+        else:
+            cart[pk] = 1  # Adaugă produsul nou în coș cu cantitatea 1
 
+        request.session['cart'] = cart  # Salvează coșul în sesiune
+
+        response = {
+            'status': 'success',
+            'item_id': pk,
+            'quantity': cart[pk]
+        }
+        return JsonResponse(response)
+
+    def get(self, request, pk):
+        # Returnează un mesaj de succes în cazul unei cereri GET
+        response = {
+            'status': 'success',
+            'message': 'GET method allowed'
+        }
+        return JsonResponse(response)
 
 class RemoveFromCartView(View):
+    @require_http_methods(["GET", "POST"])
+    def post(self,request, pk):
+        if request.method == "POST":
+            cart = request.session.get('cart', {})
+            if pk in cart:
+                del cart[pk]  # Elimină produsul din coș
+                request.session['cart'] = cart  # Salvează coșul actualizat în sesiune
 
-    def post(self, request, item_id):
-        cart_item = get_object_or_404(CartItem, id=item_id)
-        cart_item.delete()
-        return redirect('view_cart')
+                return JsonResponse({'status': 'success'})
+            else:
+                return JsonResponse({'status': 'error', 'message': 'Item not found in cart'}, status=404)
+        else:
+            # Returnează un mesaj de succes în cazul unei cereri GET
+            response = {
+                'status': 'success',
+                'message': 'GET method allowed'
+            }
+            return JsonResponse(response)

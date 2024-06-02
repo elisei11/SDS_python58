@@ -12,7 +12,7 @@
                 <p>Quantity: {{ item.quantity }}</p>
             </div>
             <div class="cart-item-actions">
-                <form method="post" action="{% url 'shop:remove-from-cart' pk=5%}">
+                <form method="post" action="{% url 'shop:remove-from-cart' item.product.pk%}">
                     {% csrf_token %}
                     <button type="submit">Remove</button>
                 </form>

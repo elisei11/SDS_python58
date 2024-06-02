@@ -4,9 +4,9 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_http_methods
 
-from django.views.generic import CreateView, ListView, TemplateView, DetailView, View, DeleteView
+from django.views.generic import CreateView, ListView, TemplateView, DetailView, View, DeleteView, FormView
 
-from .forms import CategoryForm, UserForm
+from .forms import CategoryForm, UserForm, AddToCartForm
 from .models import Category, Product, CartItem, Cart
 
 
@@ -57,6 +57,23 @@ class ListProductView(ListView):
 class ProductDetailView(DetailView):
     template_name = 'product/product_detail.html'
     model = Product
+    context_object_name = 'product'
+
+    def post(self, request, *args, **kwargs):
+        form = AddToCartForm(request.POST)
+        if form.is_valid():
+            product_id = form.cleaned_data['product_id']
+            quantity = form.cleaned_data['quantity']
+            product = get_object_or_404(Product, id=product_id)
+            cart, created = Cart.objects.get_or_create(user=request.user)
+            cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+            if not created:
+                cart_item.quantity += quantity
+            else:
+                cart_item.quantity = quantity
+            cart_item.save()
+            return redirect('shop:view_cart')
+        return self.get(request, *args, **kwargs)
 
 
 class CreateCustomerView(CreateView):
@@ -91,31 +108,28 @@ class CartView(ListView):
         return context
 
 
-class AddToCartView(View):
+class AddToCartView(FormView):
+    form_class = AddToCartForm
+    template_name = 'product/product_list.html'
+    success_url = reverse_lazy('shop:view_cart')
 
-    def post(self, request, pk):
-        cart = request.session.get('cart', {})
-        if pk in cart:
-            cart[pk] += 1  # Crește cantitatea dacă produsul este deja în coș
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['initial'] = {'product_id': self.kwargs['pk']}
+        return kwargs
+
+    def form_valid(self, form):
+        product_id = form.cleaned_data['product_id']
+        quantity = form.cleaned_data['quantity']
+        product = get_object_or_404(Product, id=product_id)
+        cart, created = Cart.objects.get_or_create(user=self.request.user)
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        if not created:
+            cart_item.quantity += quantity
         else:
-            cart[pk] = 1  # Adaugă produsul nou în coș cu cantitatea 1
-
-        request.session['cart'] = cart  # Salvează coșul în sesiune
-
-        response = {
-            'status': 'success',
-            'item_id': pk,
-            'quantity': cart[pk]
-        }
-        return JsonResponse(response)
-
-    def get(self, request, pk):
-        # Returnează un mesaj de succes în cazul unei cereri GET
-        response = {
-            'status': 'success',
-            'message': 'GET method allowed'
-        }
-        return JsonResponse(response)
+            cart_item.quantity = quantity
+        cart_item.save()
+        return super().form_valid(form)
 
 class RemoveFromCartView(View):
     @require_http_methods(["GET", "POST"])

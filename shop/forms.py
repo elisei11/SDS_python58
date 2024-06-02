@@ -55,3 +55,9 @@ class UserForm(UserCreationForm):
         self.fields['username'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Username'})
         self.fields['password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Password confirmation'})
+
+
+
+class AddToCartForm(forms.Form):
+    product_id = forms.IntegerField(widget=forms.HiddenInput)
+    quantity = forms.IntegerField(min_value=1, initial=1)

@@ -1,19 +1,24 @@
+
+
 {% extends 'base.html' %}
 
 {% block title %}List of Products{% endblock %}
 
 {% block content %}
     <div class="container-fluid mt-4">
-        <div class="row">
+
+        <div class="row text-center">
             {% for product in products %}
-                <div class="col-md-3 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
-                        <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}" style="height: 200px; width: 100%; object-fit: contain;">
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
+                            <h4 class="card-title">{{ product.name }}</h4>
                             <p class="card-text">{{ product.description }}</p>
-                            <!-- Form for adding the product to the cart -->
-                            <form method="post" action="{% url 'shop:add_to_cart' product.id %}">
+                        </div>
+                        <div class="card-footer">
+
+                            <form method="post" action="{% url 'shop:add-to-cart' product.id %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="product_id" value="{{ product.id }}">
                                 <div class="input-group mb-3">
@@ -23,12 +28,15 @@
                                     </div>
                                 </div>
                             </form>
-                            <a href="{% url 'shop:product-detail' product.id  %}" class="btn btn-secondary">View Details</a>
+
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
+
+
 {% endblock %}
-    
+
+

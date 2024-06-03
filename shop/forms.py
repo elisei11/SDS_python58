@@ -10,12 +10,13 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = '__all__'
 
-        widgets ={
+        widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Category Name'}),
             'image': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image'}),
             'slug': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Slug'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
         }
+
 
 # class CustomerForm(forms.ModelForm):
 #     class Meta:
@@ -41,8 +42,6 @@ class AuthenticationNewForm(AuthenticationForm):
 
 
 class UserForm(UserCreationForm):
-
-
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']

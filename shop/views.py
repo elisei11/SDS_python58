@@ -30,7 +30,6 @@ class HomeView(ListView):
 
 
 
-
 class ListProductView(ListView):
     template_name = 'product/product_list.html'
     context_object_name = 'products'
@@ -137,22 +136,11 @@ class AddToCartView(FormView):
         cart_item.save()
         return super().form_valid(form)
 
-class RemoveFromCartView(View):
-    @require_http_methods(["GET", "POST"])
-    def post(self,request, pk):
-        if request.method == "POST":
-            cart = request.session.get('cart', {})
-            if pk in cart:
-                del cart[pk]  # Elimină produsul din coș
-                request.session['cart'] = cart  # Salvează coșul actualizat în sesiune
 
-                return JsonResponse({'status': 'success'})
-            else:
-                return JsonResponse({'status': 'error', 'message': 'Item not found in cart'}, status=404)
-        else:
-            # Returnează un mesaj de succes în cazul unei cereri GET
-            response = {
-                'status': 'success',
-                'message': 'GET method allowed'
-            }
-            return JsonResponse(response)
+class RemoveFromCartView(DeleteView):
+    template_name = 'cart/remove_from_cart.html'
+    model = CartItem
+    success_url = reverse_lazy('shop:view_cart')
+
+    # def get_queryset(self):
+    #     return self.model.objects.filter(user=self.request.user.id)

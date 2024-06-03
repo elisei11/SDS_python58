@@ -18,9 +18,9 @@
             
             <p>Total Price for this item: {{ item.total_price }} RON</p>
             <div class="cart-item-actions">
-                <form method="post" action="{% url 'shop:remove-from-cart' item.product.pk %}">
+                <form method="post" action="{% url 'shop:remove-from-cart' item.id %}">
                     {% csrf_token %}
-                    <button type="submit">Remove</button>
+                    <button type="submit" onclick="return confirm('Are you sure you want to remove this item?');">Remove</button>
                 </form>
             </div>
         </div>

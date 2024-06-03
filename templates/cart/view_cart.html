@@ -4,13 +4,19 @@
 <div class="cart-container" style="max-width: 95%; margin: 0 auto;">
     <h2 style="text-align: center;">Your Cart</h2><br/>
     {% for item in carts %}
-    <div class="cart-item" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 30px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex;">
+    <div class="cart-item" style="border: 2px solid #ccc; padding: 30px; margin-bottom: 50px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex;">
         <div class="cart-item-image" style="margin-right: 20px;">
+            <a href="{% url 'shop:product-detail' item.product.pk %}">
             <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 100px; height: auto;">
+            </a>
         </div>
         <div class="cart-item-info" style="flex-grow: 1;">
             <p>Product: {{ item.product.name }}</p>
-            <p>Quantity: {{ item.quantity }}</p>
+            <p>Price per unit: {{ item.product.price }} RON</p>
+            <p>Quantity: <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 50px;"> </p>
+               
+            
+            <p>Total Price for this item: {{ item.total_price }} RON</p>
             <div class="cart-item-actions">
                 <form method="post" action="{% url 'shop:remove-from-cart' item.product.pk %}">
                     {% csrf_token %}
@@ -20,39 +26,18 @@
         </div>
     </div>
     {% endfor %}
+    <div class="cart-total" style="text-align: center; margin-top: 20px;">
+        <h3>Total Price: {{ total_price }} RON</h3>
+    </div>
+    <div class="place-order" style="text-align: center; margin-top: 20px;">
+{#        <form method="post" action="{% url 'shop:place-order' %}">#}
+{#            {% csrf_token %}#}
+            <button type="submit" style="padding: 10px 20px; font-size: 16px;">Place Order</button>
+{#        </form>#}
+    </div>
 </div>
+    
+  
+
 {% endblock %}
-{#{% extends 'base.html' %}#}
-{##}
-{#{% block title %}Your cart{% endblock %}#}
-{##}
-{#{% block content %}#}
-{#    <div class="container-fluid mt-4">#}
-{##}
-{#        <div class="row text-center">#}
-{#            {% for item in carts %}#}
-{#                <td class="cart-item">#}
-{#                <div class="cart-item-info">#}
-{#                <div class="col-lg-3 col-md-6 mb-4">#}
-{#                    <div class="card h-100">#}
-{#                        <img class="card-img-top" src="{{ product.image.url }}" alt="Product:{{ product.name }}">#}
-{#                        <div class="card-body">#}
-{#                            <h4 class="card-title">Product{{ product.name }}</h4>#}
-{#                            <p class="card-text">Quantity:{{ product.description }}</p>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                       <div class="cart-item-actions">#}
-{#                    <form method="post" action="{% url 'shop:remove-from-cart' item.product.pk %}">#}
-{#                        {% csrf_token %}#}
-{#                        <button type="submit">Remove</button>#}
-{#                    </form>#}
-{#                </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                </td>#}
-{#            {% endfor %}#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{##}
-{#{% endblock %}#}
+

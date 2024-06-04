@@ -53,3 +53,12 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f'{self.quantity} x {self.product.name}'
+
+
+class Subcategory(models.Model):
+    category = models.ForeignKey(Category,related_name='subcategories' ,on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name

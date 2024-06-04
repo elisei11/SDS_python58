@@ -6,15 +6,8 @@ from django.views.decorators.http import require_http_methods
 
 from django.views.generic import CreateView, ListView, TemplateView, DetailView, View, DeleteView, FormView
 
-from .forms import CategoryForm, UserForm, AddToCartForm
-from .models import Category, Product, CartItem, Cart
-
-
-class CategoryCreateView(CreateView):
-    template_name = 'shop/create_category.html'
-    model = Category
-    form_class = CategoryForm
-    success_url = reverse_lazy('list_categories')
+from .forms import UserForm, AddToCartForm
+from .models import Category, Product, CartItem, Cart, Subcategory
 
 
 class CategoryListView(ListView):
@@ -36,20 +29,33 @@ class ListProductView(ListView):
     category = None
 
     def get_queryset(self):
-        category_slug = self.kwargs.get('category_slug')
-        queryset = Product.objects.all()
-
-        if category_slug:
-            category = get_object_or_404(Category, slug=category_slug)
-            queryset = queryset.filter(category=category)
-
-        return queryset
+        subcategory_slug = self.kwargs.get('subcategory_slug')
+        subcategory = get_object_or_404(Subcategory, slug=subcategory_slug)
+        return Product.objects.filter(subcategory=subcategory)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        context['category'] = self.category
+        subcategory_slug = self.kwargs.get('subcategory_slug')
+        subcategory = get_object_or_404(Subcategory, slug=subcategory_slug)
+        context['subcategory'] = subcategory
+        context['category'] = subcategory.category  # Adăugăm și categoria părinte pentru context
         return context
+
+    # def get_queryset(self):
+    #     category_slug = self.kwargs.get('category_slug')
+    #     queryset = Product.objects.all()
+    #
+    #     if category_slug:
+    #         category = get_object_or_404(Category, slug=category_slug)
+    #         queryset = queryset.filter(category=category)
+    #
+    #     return queryset
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['categories'] = Category.objects.all()
+    #     context['category'] = self.category
+    #     return context
 
 class ProductDetailView(DetailView):
     template_name = 'product/product_detail.html'
@@ -144,3 +150,21 @@ class RemoveFromCartView(DeleteView):
 
     # def get_queryset(self):
     #     return self.model.objects.filter(user=self.request.user.id)
+
+
+class SubCategoryListView(ListView):
+    model = Subcategory
+    template_name = 'subcategory/subcategory_list.html'
+    context_object_name = 'subcategories'
+
+    def get_queryset(self):
+        category_slug = self.kwargs.get('category_slug')
+        category = get_object_or_404(Category, slug=category_slug)
+        return Subcategory.objects.filter(category=category)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_slug = self.kwargs.get('category_slug')
+        category = get_object_or_404(Category, slug=category_slug)
+        context['category'] = category
+        return context

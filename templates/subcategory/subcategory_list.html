@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Subcategories in {{ category.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Subcategories in {{ category.name }}</h1>
+    <div class="row">
+        {% for subcategory in subcategories %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 subcategory-card">
+                    {% if subcategory.image %}
+                        <img src="{{ subcategory.image.url }}" class="card-img-top img-fluid" alt="{{ subcategory.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ subcategory.name }}</h5>
+                        <a href="{% url 'shop:product-list' subcategory.slug %}" class="btn btn-primary">View Products</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

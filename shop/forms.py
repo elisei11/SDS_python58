@@ -5,17 +5,17 @@ from django.contrib.auth.models import User
 from .models import Category, CartItem
 
 
-class CategoryForm(forms.ModelForm):
-    class Meta:
-        model = Category
-        fields = '__all__'
-
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Category Name'}),
-            'image': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image'}),
-            'slug': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Slug'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
-        }
+# class CategoryForm(forms.ModelForm):
+#     class Meta:
+#         model = Category
+#         fields = '__all__'
+#
+#         widgets = {
+#             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Category Name'}),
+#             'image': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image'}),
+#             'slug': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Slug'}),
+#             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
+#         }
 
 
 # class CustomerForm(forms.ModelForm):

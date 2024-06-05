@@ -19,7 +19,7 @@
                     <li>Price: ${{ product.price }}</li>
                     <li>Stock: {{ product.stock }}</li>
                 </ul>
-                <ul></ul><a href="{% url 'shop:product-detail' product.id %}" class="btn btn-primary">Go somewhere</a>
+{#                <ul></ul><a href="{% url 'shop:product-detail' product.id %}" class="btn btn-primary">Go somewhere</a>#}
                 <form method="post" action="{% url 'shop:add-to-cart' product.id %}">
                     {% csrf_token %}
                     <input type="hidden" name="product_id" value="{{ product.id }}">

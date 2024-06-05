@@ -1,0 +1,24 @@
+.custom-search-bar {
+    flex-direction: row;
+    width: 80%;
+    max-width: 1200px;
+
+}
+
+.navbar-nav-custom {
+    flex-direction: column;
+    padding-top: 1rem;
+    background-color: #3b2897;
+}
+
+.navbar-nav-custom .nav-link {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2rem;
+    background-color: #3b2897;
+}
+
+.custom-search-input {
+    width: 100%;
+    left: 100px;
+
+}

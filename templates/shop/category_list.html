@@ -7,16 +7,18 @@
         <div class="row">
             {% for category in categories %}
             <div class="col-md-3 mb-3">
-                <div class="card h-100" style="width: 18rem;">
+                <div class="card h-100" style="width: 100%;">
+                    <a href="{% url 'shop:subcategory-list' category.slug %}">
                     <img src="{{ category.image.url }}" class="card-img-top img-fluid" alt="{{ category.name }}" style="height: 150px; width: 100%; object-fit: contain;">
+                        </a>
                     <div class="card-body">
-                        <h5 class="card-title">{{ category.name }}</h5>
-                        <p class="card-text">{{ category.description }}</p>
-                        <a href="{% url 'shop:subcategory-list' category.slug %}" class="btn btn-primary">Go to{{ category.name }}</a>
-                    </div>
+                        <h5 class="card-title text-center">{{ category.name }}</h5>
+                        <p class="card-text text-center">{{ category.description }}</p>
+{#                        <a href="{% url 'shop:subcategory-list' category.slug %}" class="btn btn-primary">{{ category.name }}</a>#}
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
+    </div>
 {% endblock %}

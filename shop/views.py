@@ -22,7 +22,6 @@ class HomeView(ListView):
     context_object_name = 'products'
 
 
-
 class ListProductView(ListView):
     template_name = 'product/product_list.html'
     context_object_name = 'products'
@@ -56,6 +55,7 @@ class ListProductView(ListView):
     #     context['categories'] = Category.objects.all()
     #     context['category'] = self.category
     #     return context
+
 
 class ProductDetailView(DetailView):
     template_name = 'product/product_detail.html'
@@ -114,9 +114,7 @@ class CartView(ListView):
         total_price = sum(item.product.price * item.quantity for item in context['carts'])
         context['total_price'] = total_price
 
-
         return context
-
 
 
 class AddToCartView(FormView):
@@ -177,6 +175,7 @@ class FavoriteView(ListView):
 
     def get_queryset(self):
         return Favorite.objects.filter(user=self.request.user).select_related('product')
+
 
 class AddToFavoriteView(FormView):
     form_class = AddToFavoriteForm

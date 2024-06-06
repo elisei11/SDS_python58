@@ -27,7 +27,7 @@
                             </button>
                         </form>
                         
-                        <form method="post" action="{% url 'shop:add-to-cart' item.product.id %}">
+                        <form method="post" action="{% url 'shop:add-to-cart' item.id %}">
                             {% csrf_token %}
                             <input type="hidden" name="product_id" value="{{ product.id }}">
                             <div class="input-group mb-3">
@@ -39,13 +39,10 @@
                             </div>
                         </form>
                     </div>
-                    <div>
-                        
-
-                    </div>
+                    
                 </div>
             </div>
-            </div>
+            
         {% endfor %}
-
+    </div>
 {% endblock %}

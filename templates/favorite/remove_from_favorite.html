@@ -1,0 +1,13 @@
+% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Remove from Favourite</h2>
+    <p>Are you sure you want to remove this item from favourite?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, remove</button>
+        <a href="{% url 'shop:view_favorite' %}" class="btn btn-secondary">No, go back</a>
+    </form>
+</div>
+{% endblock %}

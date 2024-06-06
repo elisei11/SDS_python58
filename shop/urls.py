@@ -13,6 +13,9 @@ urlpatterns = [path("", views.HomeView.as_view(), name="homepage"),
                path('add_to_cart/<int:pk>/',views.AddToCartView.as_view(), name='add-to-cart'),
                path('remove_from_cart/<int:pk>/',views.RemoveFromCartView.as_view(), name='remove-from-cart'),
                path('subcategory_list/<slug:category_slug>/', views.SubCategoryListView.as_view(), name='subcategory-list'),
+               path('add_to_favorite/<int:pk>/', views.AddToFavoriteView.as_view(), name='add-to-favorite'),
+               path('favorite/', views.FavoriteView.as_view(), name='view_favorite'),
+               path('remove_from_favorite/<int:pk>/',views.RemoveFromFavoriteView.as_view(), name='remove-from-favorite'),
                ]
 
 app_name = 'shop'

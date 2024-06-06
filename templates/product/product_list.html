@@ -12,12 +12,12 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card h-100">
                         <a href="{% url 'shop:product-detail' product.pk %}">
-                        <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">{{ product.name }}</h4>
                             <p class="card-text">{{ product.description }}</p>
-                             <p class="card-text">{{ product.price }} Lei</p>
+                            <p class="card-text">{{ product.price }} Lei</p>
                         </div>
                         <div class="card-footer">
 
@@ -27,7 +27,18 @@
                                 <div class="input-group mb-3">
                                     <input type="number" name="quantity" class="form-control" value="1" min="1">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit">Add to Cart</button>
+                                        <button class="fa-solid fa-cart-shopping btn btn-primary ms-2" type="submit"></button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                           <form method="post" action="{% url 'shop:add-to-favorite' product.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <div class="input-group mb-3">
+{#                                    <input type="number" name="quantity" class="form-control" value="1" min="1">#}
+                                    <div class="input-group-append">
+                                        <button class="bi bi-heart btn btn-outline-danger" type="submit"></button>
                                     </div>
                                 </div>
                             </form>

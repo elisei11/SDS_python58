@@ -6,8 +6,8 @@ from django.views.decorators.http import require_http_methods
 
 from django.views.generic import CreateView, ListView, TemplateView, DetailView, View, DeleteView, FormView
 
-from .forms import UserForm, AddToCartForm
-from .models import Category, Product, CartItem, Cart, Subcategory
+from .forms import UserForm, AddToCartForm, AddToFavoriteForm
+from .models import Category, Product, CartItem, Cart, Subcategory, Favorite
 
 
 class CategoryListView(ListView):
@@ -168,3 +168,34 @@ class SubCategoryListView(ListView):
         category = get_object_or_404(Category, slug=category_slug)
         context['category'] = category
         return context
+
+
+class FavoriteView(ListView):
+    model = Favorite
+    template_name = 'favorite/view_favorite.html'
+    context_object_name = 'favorite'
+
+    def get_queryset(self):
+        return Favorite.objects.filter(user=self.request.user).select_related('product')
+
+class AddToFavoriteView(FormView):
+    form_class = AddToFavoriteForm
+    template_name = 'product/product_list.html'
+    success_url = reverse_lazy('shop:view_favorite')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['initial'] = {'product_id': self.kwargs['pk']}
+        return kwargs
+
+    def form_valid(self, form):
+        product_id = form.cleaned_data['product_id']
+        product = get_object_or_404(Product, id=product_id)
+        Favorite.objects.get_or_create(user=self.request.user, product=product)
+        return super().form_valid(form)
+
+
+class RemoveFromFavoriteView(DeleteView):
+    template_name = 'favorite/remove_from_favorite.html'
+    model = Favorite
+    success_url = reverse_lazy('shop:view_favorite')

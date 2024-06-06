@@ -1,69 +1,79 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <h1>eTrade</h1> <br/>
 
- <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-           <h1>eTrade</h1> <br/>
-       
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex custom-search-bar" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-          
-                <div class="d-flex align-items-center ms-auto">
-                    {% if customer.is_authenticated %}
-                        <div class="dropdown">
-                            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-user"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                <li><form method="post" action="{% url 'logout' %}">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex custom-search-bar ms-2" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+
+            <div class="d-flex align-items-center ms-auto">
+                {% if customer.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li>
+                                <form method="post" action="{% url 'logout' %}">
                                     {% csrf_token %}
                                     <button type="submit" class="dropdown-item">Logout, {{ customer.username }}</button>
-                                </form></li>
-                            </ul>
-                        </div>
-                    {% else %}
-                        <div class="dropdown">
-                            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-user"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
-                                <li><a class="dropdown-item" href="{% url 'shop:customer-create' %}">Sign up</a></li>
-                            </ul>
-                        </div>
-                    {% endif %}
-                    <a class="btn btn-outline-success ms-2" href="{% url 'shop:view_cart' %}">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
-                </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                            <li><a class="dropdown-item" href="{% url 'shop:customer-create' %}">Sign up</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
+            
+                <a class="btn btn-outline-danger ms-2" href="{% url 'shop:view_favorite' %}">
+                    <i class="bi bi-heart"></i>
+                </a>
+
+                <a class="btn btn-outline-success ms-2" href="{% url 'shop:view_cart' %}">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary mt-2 ">
-        <div class="container-fluid ">
-            <div class="collapse navbar-collapse">
-                <div class="navbar-nav-custom">
+<nav class="navbar navbar-expand-lg bg-body-tertiary mt-2 ">
+    <div class="container-fluid ">
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav-custom">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'shop:homepage' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'shop:category-list' %}"> Produse</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'shop:category-list' %}">
+                            Produse</a>
                     </li>
                 </ul>
-                    </div>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    
-   
 
-   
+
+

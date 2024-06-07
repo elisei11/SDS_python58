@@ -171,15 +171,17 @@ class SubCategoryListView(ListView):
 class FavoriteView(ListView):
     model = Favorite
     template_name = 'favorite/view_favorite.html'
-    context_object_name = 'favorite'
+    context_object_name = 'favorites'
 
     def get_queryset(self):
         return Favorite.objects.filter(user=self.request.user).select_related('product')
 
 
+
+
 class AddToFavoriteView(FormView):
     form_class = AddToFavoriteForm
-    template_name = 'product/product_list.html'
+    template_name = 'favorite/view_favorite.html'
     success_url = reverse_lazy('shop:view_favorite')
 
     def get_form_kwargs(self):
@@ -198,3 +200,5 @@ class RemoveFromFavoriteView(DeleteView):
     template_name = 'favorite/remove_from_favorite.html'
     model = Favorite
     success_url = reverse_lazy('shop:view_favorite')
+
+

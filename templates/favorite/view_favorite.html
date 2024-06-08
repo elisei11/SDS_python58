@@ -18,7 +18,7 @@
                     {#            <p>Quantity: <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 50px;"> </p>#}
 
 
-                    <p>Total Price for this item: {{ item.total_price }} RON</p>
+{#                    <p>Total Price for this item: {{ item.product.total_price }} RON</p>#}
                     <div class="cart-item-actions">
                         <form method="post" action="{% url 'favorites:remove-from-favorite' item.product.id %}">
                             {% csrf_token %}

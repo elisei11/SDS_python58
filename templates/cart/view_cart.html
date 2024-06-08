@@ -7,7 +7,7 @@
             <div class="cart-item"
                  style="border: 2px solid #ccc; padding: 30px; margin-bottom: 50px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex;">
                 <div class="cart-item-image" style="margin-right: 20px;">
-                    <a href="{% url 'shop:product-detail' item.product.pk %}">
+                    <a href="{% url 'shop:product-detail' item.product.id %}">
                         <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
                              style="width: 100px; height: auto;">
                     </a>
@@ -27,12 +27,12 @@
 
                     <p>Total Price for this item: {{ item.total_price }} RON</p>
                     <div class="cart-item-actions">
-{#                        <form method="post" action="{% url 'cart:remove-from-cart' item.id %}">#}
-{#                            {% csrf_token %}#}
-{#                            <button type="submit" class="btn btn-outline-danger"#}
-{#                                    onclick="return confirm('Are you sure you want to remove this item?');">Remove#}
-{#                            </button>#}
-{#                        </form>#}
+                        <form method="post" action="{% url 'cart:remove-from-cart' item.product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger"
+                                    onclick="return confirm('Are you sure you want to remove this item?');">Remove
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

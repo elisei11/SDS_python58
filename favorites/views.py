@@ -41,4 +41,4 @@ def remove_from_favorites(request, product_id):
     favorites = Favorites(request)
     product = get_object_or_404(Product, pk=product_id)
     favorites.remove_from_favorites(product=product)
-    return redirect('favorites:view_favorites')
+    return redirect('favorites:view_favorite')

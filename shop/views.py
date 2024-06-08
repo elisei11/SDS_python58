@@ -20,6 +20,14 @@ class HomeView(ListView):
     template_name = 'homepage.html'
     model = Product
     context_object_name = 'products'
+    add_to_cart_form = AddToCartForm
+    favorite_form = AddToFavoriteForm
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['favorite_product_form'] = self.favorite_form
+        context['add_to_cart_form'] = self.add_to_cart_form
+        return context
 
 
 class ListProductView(ListView):
@@ -96,58 +104,58 @@ class CreateCustomerView(CreateView):
             new_user.save()
 
 
-class CartView(ListView):
-    model = CartItem
-    template_name = 'cart/view_cart.html'
-    context_object_name = 'carts'
+# class CartView(ListView):
+#     model = CartItem
+#     template_name = 'cart/view_cart.html'
+#     context_object_name = 'carts'
+#
+#     def get_queryset(self):
+#         cart, created = Cart.objects.get_or_create(user=self.request.user)
+#         return CartItem.objects.filter(cart=cart)
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['cart'], created = Cart.objects.get_or_create(user=self.request.user)
+#         for item in context['carts']:
+#             item.total_price = item.product.price * item.quantity
+#
+#         total_price = sum(item.product.price * item.quantity for item in context['carts'])
+#         context['total_price'] = total_price
+#
+#         return context
+#
+#
+# class AddToCartView(FormView):
+#     form_class = AddToCartForm
+#     template_name = 'product/product_list.html'
+#     success_url = reverse_lazy('shop:view_cart')
+#
+#     def get_form_kwargs(self):
+#         kwargs = super().get_form_kwargs()
+#         kwargs['initial'] = {'product_id': self.kwargs['pk']}
+#         return kwargs
+#
+#     def form_valid(self, form):
+#         product_id = form.cleaned_data['product_id']
+#         quantity = form.cleaned_data['quantity']
+#         product = get_object_or_404(Product, id=product_id)
+#         cart, created = Cart.objects.get_or_create(user=self.request.user)
+#         cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+#         if not created:
+#             cart_item.quantity += quantity
+#         else:
+#             cart_item.quantity = quantity
+#         cart_item.save()
+#         return super().form_valid(form)
+#
+#
+# class RemoveFromCartView(DeleteView):
+#     template_name = 'cart/remove_from_cart.html'
+#     model = CartItem
+#     success_url = reverse_lazy('shop:view_cart')
 
-    def get_queryset(self):
-        cart, created = Cart.objects.get_or_create(user=self.request.user)
-        return CartItem.objects.filter(cart=cart)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cart'], created = Cart.objects.get_or_create(user=self.request.user)
-        for item in context['carts']:
-            item.total_price = item.product.price * item.quantity
-
-        total_price = sum(item.product.price * item.quantity for item in context['carts'])
-        context['total_price'] = total_price
-
-        return context
-
-
-class AddToCartView(FormView):
-    form_class = AddToCartForm
-    template_name = 'product/product_list.html'
-    success_url = reverse_lazy('shop:view_cart')
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['initial'] = {'product_id': self.kwargs['pk']}
-        return kwargs
-
-    def form_valid(self, form):
-        product_id = form.cleaned_data['product_id']
-        quantity = form.cleaned_data['quantity']
-        product = get_object_or_404(Product, id=product_id)
-        cart, created = Cart.objects.get_or_create(user=self.request.user)
-        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-        if not created:
-            cart_item.quantity += quantity
-        else:
-            cart_item.quantity = quantity
-        cart_item.save()
-        return super().form_valid(form)
-
-
-class RemoveFromCartView(DeleteView):
-    template_name = 'cart/remove_from_cart.html'
-    model = CartItem
-    success_url = reverse_lazy('shop:view_cart')
-
-    # def get_queryset(self):
-    #     return self.model.objects.filter(user=self.request.user.id)
+# def get_queryset(self):
+#     return self.model.objects.filter(user=self.request.user.id)
 
 
 class SubCategoryListView(ListView):
@@ -167,38 +175,30 @@ class SubCategoryListView(ListView):
         context['category'] = category
         return context
 
-
-class FavoriteView(ListView):
-    model = Favorite
-    template_name = 'favorite/view_favorite.html'
-    context_object_name = 'favorites'
-
-    def get_queryset(self):
-        return Favorite.objects.filter(user=self.request.user).select_related('product')
-
-
-
-
-class AddToFavoriteView(FormView):
-    form_class = AddToFavoriteForm
-    template_name = 'favorite/view_favorite.html'
-    success_url = reverse_lazy('shop:view_favorite')
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['initial'] = {'product_id': self.kwargs['pk']}
-        return kwargs
-
-    def form_valid(self, form):
-        product_id = form.cleaned_data['product_id']
-        product = get_object_or_404(Product, id=product_id)
-        Favorite.objects.get_or_create(user=self.request.user, product=product)
-        return super().form_valid(form)
-
-
+#
+# #
+# #
+# #
+# #
+# # class AddToFavoriteView(FormView):
+# #     form_class = AddToFavoriteForm
+# #     template_name = 'favorite/view_favorite.html'
+# #     success_url = reverse_lazy('shop:view_favorite')
+# #
+# #     def get_form_kwargs(self):
+# #         kwargs = super().get_form_kwargs()
+# #         kwargs['initial'] = {'product_id': self.kwargs['pk']}
+# #         return kwargs
+# #
+# #     def form_valid(self, form):
+# #         product_id = form.cleaned_data['product_id']
+# #         product = get_object_or_404(Product, id=product_id)
+# #         Favorite.objects.get_or_create(user=self.request.user, product=product)
+# #         return super().form_valid(form)
+# #
+# #
 class RemoveFromFavoriteView(DeleteView):
     template_name = 'favorite/remove_from_favorite.html'
     model = Favorite
     success_url = reverse_lazy('shop:view_favorite')
-
 

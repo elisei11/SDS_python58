@@ -37,11 +37,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "shop"
-    ,
+    "shop",
+    "cart",
+    "favorites"
+
+
 
 ]
 
+
+CART_SESSION_ID = "cart"
+FAVORITES_SESSION_ID = "favorites"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

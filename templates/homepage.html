@@ -24,7 +24,7 @@
                         </div>
                         <div class="card-footer">
 
-                            <form method="post" action="{% url 'shop:add-to-cart' product.id %}">
+                            <form method="post" action="{% url 'cart:add-to-cart' product.id %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="product_id" value="{{ product.id }}">
                                 <div class="input-group mb-3">
@@ -36,11 +36,14 @@
                                 </div>
                             </form>
 
-                            <form method="post" action="{% url 'shop:add-to-favorite' product.id %}">
+                            <form method="post" action="{% url 'favorites:add-to-favorite' product.id %}">
                                 {% csrf_token %}
-                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                {{ favorite_product_form.quantity }}
+                                
+                                
+{#                                <input type="hidden" name="product_id" value="{{ product.id }}">#}
                                 <div class="input-group mb-3">
-                                    {#                                    <input type="number" name="quantity" class="form-control" value="1" min="1">#}
+{#                                                                        <input type="number" name="quantity" class="form-control" value="1" min="1">#}
                                     <div class="input-group-append">
                                         <button class="bi bi-heart btn btn-outline-danger " type="submit"> Add to favorites </button>
                                     </div>

@@ -28,6 +28,8 @@ urlpatterns = [
     path("",include("shop.urls",namespace="shop")),
     path("login/", views.LoginView.as_view(form_class=AuthenticationNewForm), name="login"),
     path('', include('django.contrib.auth.urls')),
+    path("cart/", include('cart.urls', namespace="cart")),
+    path("favorites/", include('favorites.urls', namespace="favorites")),
 
 
 

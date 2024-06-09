@@ -137,8 +137,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Directorul în care Django va colecta toate fișierele statice (pentru producție)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

@@ -41,12 +41,11 @@
             <h3>Total Price: {{ cart.get_total_price }} RON</h3>
         </div>
         <div class="place-order" style="text-align: center; margin-top: 20px;">
-            {#        <form method="post" action="{% url 'shop:place-order' %}">#}
-            {#            {% csrf_token %}#}
-            <button type="submit" style="padding: 10px 20px; font-size: 16px;" class="btn btn-outline-success">Place
+
+            <a href="{% url "order:place-order"%}" style="padding: 10px 20px; font-size: 16px;" class="btn btn-outline-success">Place
                 Order
-            </button>
-            {#        </form>#}
+            </a>
+
         </div>
     </div>
 

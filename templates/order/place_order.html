@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 gy-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Place Order</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'order:place-order' %}" method="post" id="payment-form">
+                            {% csrf_token %}
+                            {{ form }}
+                            <div class="form-row">
+                                <label for="card-element">Credit or debit card</label>
+                                <div id="card-element">
+                                    <!-- Stripe element will be inserted here -->
+                                </div>
+                                <div id="card-errors" role="alert"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Submit Payment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

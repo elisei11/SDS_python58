@@ -21,8 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-fyzi1baxe$_r2capsa%l%!oj1hqgm5fl(5@5#(awh56t%ke2ik"
-STRIPE_SECRET_KEY = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
-STRIPE_PUBLIC_KEY = 'pk_test_TYooMQauvdEDq54NiTphI7jx'
+STRIPE_SECRET_KEY ="sk_test_51PPeyuIvleCYiIpGNHqmKLkA2cs5ZLbeLjz3wPSL20ioZGjawnZU9SpUnTDxnbXVTmcnL0HigKV0eo13gCCg2unw00kKQBFyDN"
+STRIPE_PUBLISHABLE_KEY ="pk_test_51PPeyuIvleCYiIpG0UxNS2hMRFcbP6Y52duqhTDYib6SOSfkWq9jasH406RgBlj6GO2ExBKZy9Q4aQz4LjWeOl6x00pyM0jmkz"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -143,3 +143,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'ecommerceproject/../static/')
 LOGIN_URL = "/login/" # prefixul url-ului pentru logare
 LOGIN_REDIRECT_URL = "/" # unde va fi redirectionat utilizatorul dupa autentificare
 LOGOUT_REDIRECT_URL = "/login/" # unde va fi redirectionat utilizatorul dupa delogare
+#

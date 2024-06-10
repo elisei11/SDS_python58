@@ -7,19 +7,15 @@ from cart.cart import Cart
 from order.forms import OrderForm
 from order.models import OrderItem, Order
 
-
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
-
-import stripe
-from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
+from django.conf import settings
 from django.views.generic import View
+from django.urls import reverse
 from cart.cart import Cart
 from order.forms import OrderForm
 from order.models import OrderItem, Order
-from shop.models import Product  # Asigură-te că importi modelul Product
+from shop.models import Product
+import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -35,14 +31,18 @@ class PlaceOrderView(View):
         if form.is_valid():
             data = form.cleaned_data
             total_amount = sum(item['price'] * item['quantity'] for item in cart)
-            order = Order.objects.create(total_amount=total_amount, user=request.user, **data)
+
+            # If user is not authenticated, user will be None
+            user = request.user if request.user.is_authenticated else None
+
+            order = Order.objects.create(total_amount=total_amount, user=user, **data)
             order.save()
             for item in cart:
                 product = item["product"]
                 quantity = item["quantity"]
                 OrderItem.objects.create(order=order, product=product, price=item["price"], quantity=quantity)
 
-                # Actualizează stocul produsului
+                # Update product stock
                 product.stock -= quantity
                 product.save()
 
@@ -68,14 +68,14 @@ class PlaceOrderView(View):
                 ),
             )
 
-            # Goleste coșul după crearea sesiunii Stripe
+            # Clear the cart after creating the Stripe session
             cart.clear()
 
             return redirect(session.url, code=303)
         return render(request, 'order/place_order.html', {'form': form})
 
+
 class OrderCreate(View):
     def get(self, request, order_id, *args, **kwargs):
         order = get_object_or_404(Order, id=order_id)
-        return render(request, 'order/order_created.html', {'order': order})
-#
+        return render(request, 'order/order_created.html', {'order': order})  #

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Payment for Order {{ order.id }}</h2>
+    <p>Total Amount: {{ order.total_amount }} RON</p>
+    <form action="{% url 'order:payment' order.id %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="card_number">Card Number</label>
+            <input type="text" class="form-control" id="card_number" name="card_number" required>
+        </div>
+        <div class="form-group">
+            <label for="exp_month">Expiration Month</label>
+            <input type="text" class="form-control" id="exp_month" name="exp_month" required>
+        </div>
+        <div class="form-group">
+            <label for="exp_year">Expiration Year</label>
+            <input type="text" class="form-control" id="exp_year" name="exp_year" required>
+        </div>
+        <div class="form-group">
+            <label for="cvc">CVC</label>
+            <input type="text" class="form-control" id="cvc" name="cvc" required>
+        </div>
+        <input type="hidden" name="stripeToken" id="stripeToken">
+        <button type="submit" class="btn btn-primary mt-3">Submit Payment</button>
+    </form>
+</div>
+{% endblock %}
+

@@ -1,11 +1,25 @@
 import stripe
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.views.generic import View
-
+from django.urls import reverse
 from cart.cart import Cart
 from order.forms import OrderForm
 from order.models import OrderItem, Order
+
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+import stripe
+from django.conf import settings
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+from django.views.generic import View
+from cart.cart import Cart
+from order.forms import OrderForm
+from order.models import OrderItem, Order
+from shop.models import Product  # Asigură-te că importi modelul Product
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -13,8 +27,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class PlaceOrderView(View):
     def get(self, request, *args, **kwargs):
         form = OrderForm()
-        return render(request, 'order/place_order.html',
-                      {'form': form, "stripe.public_key": settings.STRIPE_PUBLISHABLE_KEY})
+        return render(request, 'order/place_order.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = OrderForm(request.POST)
@@ -23,45 +36,46 @@ class PlaceOrderView(View):
             data = form.cleaned_data
             total_amount = sum(item['price'] * item['quantity'] for item in cart)
             order = Order.objects.create(total_amount=total_amount, user=request.user, **data)
-            # order.total_amount = sum(item['price'] * item['quantity'] for item in cart)
-
-            order.user_id = request.user.id
-
             order.save()
             for item in cart:
-                OrderItem.objects.create(order=order, product=item["product"], price=item["price"],
-                                         quantity=item["quantity"])
-            token = request.POST.get('stripeToken')
-            charge = stripe.Charge.create(
-                amount=int(order.total_amount * 100),
-                currency='ron',
-                description=f'Order{order.id}',
-                source=token,
+                product = item["product"]
+                quantity = item["quantity"]
+                OrderItem.objects.create(order=order, product=product, price=item["price"], quantity=quantity)
+
+                # Actualizează stocul produsului
+                product.stock -= quantity
+                product.save()
+
+            # Create Stripe Checkout Session
+            session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[{
+                    'price_data': {
+                        'currency': 'ron',
+                        'product_data': {
+                            'name': 'Order {}'.format(order.id),
+                        },
+                        'unit_amount': int(order.total_amount * 100),  # Stripe expects amount in cents
+                    },
+                    'quantity': 1,
+                }],
+                mode='payment',
+                success_url=request.build_absolute_uri(
+                    reverse('order:order-created', kwargs={'order_id': order.id})
+                ),
+                cancel_url=request.build_absolute_uri(
+                    reverse('order:place-order')
+                ),
             )
-            if charge['status'] == 'succeeded':
-                order.save()
-                self.proces_payment(request, order)
-                cart.clear()
-                return redirect('order_created', order_id=order.id)
 
-        return render(request, 'order/place_order.html')
+            # Goleste coșul după crearea sesiunii Stripe
+            cart.clear()
 
-    def proces_payment(self, request, order):
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        stripe.api_version = "2024-04-10"
-        sesion_data = {
-            "mode": "payment",
-            "client_reference_id": order.id,
-            "succes_url": request.build_absolute_uri("order:order_created", order.id),
-            "cancel_url": request.build_absolute_uri("order:order_created", order.id),
-            "line_items": [{"quantity": 1, "price": order.total_amount, "currency": "ron"}],
-
-        }
-        sesion = stripe.checkout.Session.create(**sesion_data)
-        return redirect(sesion.url, code=303)
-
+            return redirect(session.url, code=303)
+        return render(request, 'order/place_order.html', {'form': form})
 
 class OrderCreate(View):
-    def get(self, request, *args, **kwargs):
-
-        return render(request, 'order/order_created.html')
+    def get(self, request, order_id, *args, **kwargs):
+        order = get_object_or_404(Order, id=order_id)
+        return render(request, 'order/order_created.html', {'order': order})
+#

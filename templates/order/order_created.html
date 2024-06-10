@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Order Created</h2>
+    <p>Thank you for your order! Your order ID is {{ order.id }}.</p>
+    <p>Total Amount: {{ order.total_amount }} RON</p>
+    <ul>
+        {% for item in order.orderitem_set.all %}
+            <li>{{ item.product.name }} - {{ item.quantity }} x {{ item.price }} RON</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

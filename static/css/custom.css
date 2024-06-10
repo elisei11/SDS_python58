@@ -19,7 +19,7 @@
 .navbar-nav-custom {
     flex-direction: column;
     padding-top: 1rem;
-    background-color: #3b2897;
+    background-color: blue;
 }
 
 .navbar-nav-custom .nav-link {

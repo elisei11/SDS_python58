@@ -36,6 +36,9 @@ def view_favorites(request):
     return render(request, 'favorite/view_favorite.html', {'favorites': favorites})
 
 
+
+
+
 @require_POST
 def remove_from_favorites(request, product_id):
     favorites = Favorites(request)

@@ -33,3 +33,10 @@
     left: 100px;
 
 }
+
+.jumbotron-background {
+    background-image: url('media/images/haine.jpeg') !important;
+    background-size: cover;
+    background-position: center;
+    color: aliceblue; /* Add appropriate color for text to ensure readability */
+}

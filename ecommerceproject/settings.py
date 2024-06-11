@@ -15,20 +15,18 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-fyzi1baxe$_r2capsa%l%!oj1hqgm5fl(5@5#(awh56t%ke2ik"
-STRIPE_SECRET_KEY ="sk_test_51PPeyuIvleCYiIpGNHqmKLkA2cs5ZLbeLjz3wPSL20ioZGjawnZU9SpUnTDxnbXVTmcnL0HigKV0eo13gCCg2unw00kKQBFyDN"
-STRIPE_PUBLISHABLE_KEY ="pk_test_51PPeyuIvleCYiIpG0UxNS2hMRFcbP6Y52duqhTDYib6SOSfkWq9jasH406RgBlj6GO2ExBKZy9Q4aQz4LjWeOl6x00pyM0jmkz"
+STRIPE_SECRET_KEY = "sk_test_51PPeyuIvleCYiIpGNHqmKLkA2cs5ZLbeLjz3wPSL20ioZGjawnZU9SpUnTDxnbXVTmcnL0HigKV0eo13gCCg2unw00kKQBFyDN"
+STRIPE_PUBLISHABLE_KEY = "pk_test_51PPeyuIvleCYiIpG0UxNS2hMRFcbP6Y52duqhTDYib6SOSfkWq9jasH406RgBlj6GO2ExBKZy9Q4aQz4LjWeOl6x00pyM0jmkz"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -44,10 +42,7 @@ INSTALLED_APPS = [
     "favorites",
     "order"
 
-
-
 ]
-
 
 CART_SESSION_ID = "cart"
 FAVORITES_SESSION_ID = "favorites"
@@ -81,7 +76,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "ecommerceproject.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -91,7 +85,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -111,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -123,17 +115,16 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
-
-
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -141,10 +132,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'ecommerceproject/../static/')
-
-
-LOGIN_URL = "/login/" # prefixul url-ului pentru logare
-LOGIN_REDIRECT_URL = "/" # unde va fi redirectionat utilizatorul dupa autentificare
-LOGOUT_REDIRECT_URL = "/login/" # unde va fi redirectionat utilizatorul dupa delogare
+LOGIN_URL = "/login/"  # prefixul url-ului pentru logare
+LOGIN_REDIRECT_URL = "/"  # unde va fi redirectionat utilizatorul dupa autentificare
+LOGOUT_REDIRECT_URL = "/login/"  # unde va fi redirectionat utilizatorul dupa delogare
 #

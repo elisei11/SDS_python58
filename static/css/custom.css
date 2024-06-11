@@ -35,8 +35,22 @@
 }
 
 .jumbotron-background {
-    background-image: url('media/images/haine.jpeg') !important;
+    background-image: url(" static/images/img.png") !important;
     background-size: cover;
     background-position: center;
-    color: aliceblue; /* Add appropriate color for text to ensure readability */
+    color: blue; /* Ensure text is readable */
+    height: 100vh; /* Adjust height as needed */
+    width: 100%; /* Ensure it covers the full width */
 }
+
+.custom-background {
+    background-image: url("static/images/img.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Ensure the background covers the whole viewport */
+}
+
+/*.custom-background {*/
+/*    background-color: #f0f0f0; !* or any other background color or style *!*/
+/*    padding: 20px; }*/

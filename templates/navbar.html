@@ -20,19 +20,19 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="d-flex custom-search-input">
+            <div class="d-flex custom-search-input ">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                        id="searchQuery">
-                <a class="btn btn-outline-success" id="searchButton">Search</a>
+                <a class=" fas fa-search btn btn-outline-success " id="searchButton"></a>
             </div>
 
 
             <div class="d-flex align-items-center ms-auto">
                 {% if customer.is_authenticated %}
-                    <div class="dropdown">
-                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown"
+                    <div class="dropdown ">
+                        <button class="btn btn-outline-primary dropdown-toggle " type="button" id="userDropdown"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-user"></i>
+                            <i class="fa fa-user "></i>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
                             <li>

@@ -93,6 +93,7 @@ class CreateCustomerView(CreateView):
     form_class = UserForm
     success_url = reverse_lazy('login')
 
+
     def form_valid(self, form):
         if form.is_valid():
             new_user = form.save(commit=False)

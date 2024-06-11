@@ -3,53 +3,47 @@
 {% block content %}
     <div class="cart-container" style="max-width: 95%; margin: 0 auto;">
         <h2 style="text-align: center;">Your Cart</h2><br/>
-        {% for item in cart %}
-            <div class="cart-item"
-                 style="border: 2px solid #ccc; padding: 30px; margin-bottom: 50px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex;">
-                <div class="cart-item-image" style="margin-right: 20px;">
-                    <a href="{% url 'shop:product-detail' item.product.id %}">
-                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
-                             style="width: 100px; height: auto;">
-                    </a>
-                </div>
-                <div class="cart-item-info" style="flex-grow: 1;">
-                    <p>Product: {{ item.product.name }}</p>
-                    <p>Price per unit: {{ item.product.price }} RON</p>
-                    <form method="post" action="{% url 'cart:add-to-cart' item.product.id %}">
-                        {% csrf_token %}
-                        {{ item.update_quantity.quantity }}
-                        {{ item.update_quantity.override }}
-
-                        <p>Quantity: <input type="submit" name="quantity" value="Update"
-                                            style="width: 80px;" class="btn btn-outline-success"></p>
-                    </form>
-
-
-                    <p>Total Price for this item: {{ item.total_price }} RON</p>
-                    <div class="cart-item-actions">
-                        <form method="post" action="{% url 'cart:remove-from-cart' item.product.id %}">
+        {% if cart %}
+            {% for item in cart %}
+                <div class="cart-item"
+                     style="border: 2px solid #ccc; padding: 30px; margin-bottom: 50px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex;">
+                    <div class="cart-item-image" style="margin-right: 20px;">
+                        <a href="{% url 'shop:product-detail' item.product.id %}">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                                 style="width: 100px; height: auto;">
+                        </a>
+                    </div>
+                    <div class="cart-item-info" style="flex-grow: 1;">
+                        <p>Product: {{ item.product.name }}</p>
+                        <p>Price per unit: {{ item.product.price }} RON</p>
+                        <form method="post" action="{% url 'cart:add-to-cart' item.product.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger"
-                                    onclick="return confirm('Are you sure you want to remove this item?');">Remove
-                            </button>
+                            {{ item.update_quantity.quantity }}
+                            {{ item.update_quantity.override }}
+                            <p>Quantity: <input type="submit" name="quantity" value="Update"
+                                                style="width: 80px;" class="btn btn-outline-success"></p>
                         </form>
+                        <p>Total Price for this item: {{ item.total_price }} RON</p>
+                        <div class="cart-item-actions">
+                            <form method="post" action="{% url 'cart:remove-from-cart' item.product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger"
+                                        onclick="return confirm('Are you sure you want to remove this item?');">Remove
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+            {% endfor %}
+            <div class="cart-total" style="text-align: center; margin-top: 20px;">
+                <h3>Total Price: {{ cart.get_total_price }} RON</h3>
             </div>
-        {% endfor %}
-        <div class="cart-total" style="text-align: center; margin-top: 20px;">
-            <h3>Total Price: {{ cart.get_total_price }} RON</h3>
-        </div>
-        <div class="place-order" style="text-align: center; margin-top: 20px;">
-
-            <a href="{% url "order:place-order"%}" style="padding: 10px 20px; font-size: 16px;" class="btn btn-outline-success">Place
-                Order
-            </a>
-
-        </div>
+            <div class="place-order" style="text-align: center; margin-top: 20px;">
+                <a href="{% url "order:place-order"%}" style="padding: 10px 20px; font-size: 16px;" class="btn btn-outline-success">Place Order</a>
+            </div>
+        {% else %}
+            <p style="text-align: center;">Your cart is empty, start shopping!</p>
+        {% endif %}
     </div>
-
-
-
 {% endblock %}
 

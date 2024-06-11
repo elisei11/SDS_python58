@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Search Results for "{{ query }}"</h2>
+
+    <h3>Products</h3>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <a href="{% url 'shop:product-detail' product.pk %}">
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title">{{ product.name }}</h4>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text">{{ product.price }} Lei</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'shop:product-detail' product.pk %}" class="btn btn-primary">View Product</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3>Subcategories</h3>
+<div class="row">
+    {% for subcategory in subcategories %}
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <a href="{% url 'shop:product-list' subcategory.slug %}">
+                <img class="card-img-top" src="{{ subcategory.image.url }}" alt="{{ subcategory.name }}">
+            </a>
+            <div class="card-body">
+                <h4 class="card-title">{{ subcategory.name }}</h4>
+                <p class="card-text">{{ subcategory.description }}</p>
+            </div>
+            <div class="card-footer">
+{#                <a href="{% url 'shop:product-list' subcategory.slug %}" class="btn btn-primary">View Subcategory</a>#}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock %}

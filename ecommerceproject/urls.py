@@ -31,6 +31,7 @@ urlpatterns = [
     path("cart/", include('cart.urls', namespace="cart")),
     path("favorites/", include('favorites.urls', namespace="favorites")),
     path("order/", include('order.urls', namespace="order")),
+    path("search/", include('search.urls', namespace="search")),
 
 
 

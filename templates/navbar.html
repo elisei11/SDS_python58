@@ -29,7 +29,7 @@
 
 
             <div class="d-flex align-items-center ms-auto">
-                {% if customer.is_authenticated %}
+                {% if user.is_authenticated %}
                     <div class="dropdown ">
                         <button class="btn btn-outline-primary dropdown-toggle " type="button" id="userDropdown"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,7 +39,7 @@
                             <li>
                                 <form method="post" action="{% url 'logout' %}">
                                     {% csrf_token %}
-                                    <button type="submit" class="dropdown-item">Logout, {{ customer.username }}</button>
+                                    <button type="submit" class="dropdown-item">Logout, {{ user.username }}</button>
                                 </form>
                             </li>
                         </ul>
@@ -72,19 +72,19 @@
 
 </nav>
 
-<nav class="navbar navbar-expand-lg  ">
+<nav class="navbar navbar-expand-lg   ">
     <div class="container-fluid ">
         <div class="collapse navbar-collapse">
 {#            <div class="navbar-nav-custom">#}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                    <li class="nav-item">
-                        <h4>
-                        <a class="nav-link active" aria-current="page" href="{% url 'shop:homepage' %}">Home</a>
+                    <li class="nav-item ">
+                        <h4 >
+                        <a class="nav-link color-text  " aria-current="page" href="{% url 'shop:homepage' %}">Home</a>
                         </h4>
                     </li>
                     <li class="nav-item">
                         <h4>
-                        <a class="nav-link active" aria-current="page" href="{% url 'shop:category-list' %}">
+                        <a class="nav-link color-text " aria-current="page" href="{% url 'shop:category-list' %}">
                             Produse</a>
                         </h4>   
                     </li>

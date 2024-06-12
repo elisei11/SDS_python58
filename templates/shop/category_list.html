@@ -3,6 +3,16 @@
 {% block title %}Categorii produse{% endblock %}
 
 {% block content %}
+    <style>
+     body, html {
+        background-image: url("media/images/shopping cart.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 100%;
+    }
+    </style>
     <div class="container-fluid mt-4">
         <div class="row">
             {% for category in categories %}

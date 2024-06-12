@@ -34,6 +34,15 @@
 
 }
 
+.color-text {
+    color: white!important;
+
+}
+
+.color-text:hover{ box-shadow: 0 4px 8px red; /* Add shadow for emphasis */
+
+}
+
 /*.custom-search-input .btn {*/
 /*    border: 2px solid #007bff; !* Button border color *!*/
 /*    border-radius: 0 30px 30px 0; !* Rounded corners for right side *!*/
@@ -93,3 +102,52 @@
 /*.custom-background {*/
 /*    background-color: #f0f0f0; !* or any other background color or style *!*/
 /*    padding: 20px; }*/
+
+ .card {!important;
+        width: 100%; /* Set the width of the card */
+        margin-bottom: 10px; /* Reduce margin to prevent excessive spacing */
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s, box-shadow 0.3s; /* Add transition for smooth effect */
+
+    }
+     .card:hover {
+        transform: translateY(-5px); /* Slightly lift the card */
+        box-shadow: 0 4px 8px red; /* Add shadow for emphasis */
+    }
+
+    .card-img-top {
+        width: 100%; /* Set the width of the image */
+        height: 150px; /* Set a fixed height for the image */
+        object-fit: contain; /* Contain the image without cropping */
+    }
+
+    .card-body {
+        padding: 10px; /* Reduce padding for a more compact look */
+    }
+
+    .card-title {
+        font-size: 1rem; /* Reduce the font size */
+    }
+
+    .card-text {
+        font-size: 0.875rem; /* Reduce the font size */
+    }
+
+    .card-footer {
+        text-align: center;
+        padding: 10px; /* Reduce padding for a more compact look */
+    }
+
+
+
+  body, html {
+        background-image: url("media/images/shopping cart.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 100%;
+    }

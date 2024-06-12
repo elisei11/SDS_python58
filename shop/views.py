@@ -29,6 +29,15 @@ class HomeView(ListView):
         context['add_to_cart_form'] = self.add_to_cart_form
         return context
 
+    def get(self, request, *args, **kwargs):
+        subcategories = Subcategory.objects.all()
+        products = Product.objects.all()
+        context = {
+            'subcategories': subcategories,
+            'products': products
+        }
+        return render(request, 'homepage.html', context)
+
 
 class ListProductView(ListView):
     template_name = 'product/product_list.html'

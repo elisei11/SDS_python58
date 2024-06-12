@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     "cart",
     "favorites",
     "order",
-    "search"
+    "search",
+    "feedback",
 
 ]
 

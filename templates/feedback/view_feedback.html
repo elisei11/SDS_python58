@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Feedback for {{ product.name }}{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-header">
+      <h2>Customer Reviews for {{ product.name }}</h2>
+      <a href="{% url 'create_feedback' product.id %}" class="btn">Leave Feedback</a>
+    </div>
+    <div class="card-body">
+      <ul class="feedback-list">
+        {% for feedback in feedbacks %}
+          <li class="feedback-item">
+            <div class="card">
+              <div class="card-body">
+                <strong>{{ feedback.user.username }}:</strong>
+                <span>{{ feedback.comment }}</span>
+                <div class="rating">Rating: {{ feedback.rating }}</div>
+                <div class="timestamp">Posted on: {{ feedback.created_at }}</div>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_css %}
+  <style>
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 1em 0;
+      padding: 1em;
+    }
+    .card-header {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1em;
+      margin-bottom: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .feedback-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .feedback-item {
+      margin-bottom: 1em;
+    }
+    .btn {
+      background-color: #007bff;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .rating {
+      color: #ff9800;
+    }
+    .timestamp {
+      color: #757575;
+      font-size: 0.8em;
+    }
+  </style>
+{% endblock %}

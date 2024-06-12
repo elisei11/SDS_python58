@@ -32,6 +32,7 @@ urlpatterns = [
     path("favorites/", include('favorites.urls', namespace="favorites")),
     path("order/", include('order.urls', namespace="order")),
     path("search/", include('search.urls', namespace="search")),
+    path("feedback/", include('feedback.urls', namespace="feedback")),
 
 
 

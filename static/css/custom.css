@@ -19,20 +19,59 @@
 .navbar-nav-custom {
     flex-direction: column;
     padding-top: 1rem;
-    background-color: blue;
+    background-color: aliceblue;
 }
 
 .navbar-nav-custom .nav-link {
     font-family: 'Arial', sans-serif;
     font-size: 1.2rem;
-    background-color: #3b2897;
+    background-color: aliceblue;
 }
 
 .custom-search-input {
-    width: 100%;
-    left: 100px;
+    width: 60%;
+    margin: 0 auto;
 
 }
+
+/*.custom-search-input .btn {*/
+/*    border: 2px solid #007bff; !* Button border color *!*/
+/*    border-radius: 0 30px 30px 0; !* Rounded corners for right side *!*/
+/*    padding: 10px 20px; !* Padding inside the button *!*/
+/*    background-color: #007bff; !* Background color *!*/
+/*    color: white; !* Text color *!*/
+/*    cursor: pointer; !* Pointer cursor on hover *!*/
+/*    transition: background-color 0.3s, border-color 0.3s; !* Smooth transition for hover *!*/
+/*}*/
+
+/*.custom-search-input {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    position: relative;*/
+/*    width: 100%; !* Ensure the container takes full width *!*/
+/*    max-width: 600px; !* Adjust the maximum width as needed *!*/
+/*    margin: 0 auto; !* Center the search bar *!*/
+/*}*/
+
+.custom-search-input .form-control {
+    flex-grow: 1;
+    width: 80%;
+    margin: 0 auto;
+    min-width: 300px; /* Adjust the width as needed */
+    max-width: 600px; /* Set a maximum width if necessary */
+    border: 2px solid #ccc;
+    border-radius: 30px; /* Adjust border-radius for rounded ends */
+    padding: 10px 20px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+}
+
+.custom-search-input .btn {
+    border-radius: 50%; /* Make the button round */
+    border: none; /* Remove border around the button */
+}
+
 
 .jumbotron-background {
     background-image: url(" static/images/img.png") !important;

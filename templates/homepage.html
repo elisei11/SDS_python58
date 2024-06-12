@@ -1,79 +1,96 @@
 {% extends 'base.html' %}
 
-
 {% block title %} Welcome {% endblock %}
+
 {% block content %}
     
- <style>
-        body, html {
-            background-image: url("media/images/shopping cart.jpeg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            height: 100%;
-            
-        }
+<style>
+    body, html {
+        background-image: url("media/images/shopping cart.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 100%;
+    }
 
-        .jumbotron {
-            background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent overlay */
-            color: white;
-            padding: 100px 0; /* Adjust padding as needed */
-        }
+    .jumbotron {
+        background-color: transparent; /* Add a semi-transparent overlay */
+        color: white;
+        padding: 0 0; /* Adjust padding as needed */
+        width: 50%;
+        margin: 0 auto;
+    }
 
+    .card {
+        width: 75%; /* Set the width of the card */
+        height: 50%;
+        position: relative;
+        top:50%;
+        left:50%;
+        right: 20%;
+        transform: translate(-50%, -50%);
+        
+        
+       
+    }
 
-    </style>
+    .card-img-top {
+        width: 100%; /* Set the width of the image */
+        height: 200px; /* Let the height adjust automatically */
+    }
 
-  
-    <div class="container custom-background">
-        <header class="jumbotron my-4 ">
-            <h1 class="display-3 text-center">Welcome to eTrade!</h1>
-            <p class="lead text-center">You find the best products at the best prices.</p>
-        </header>
+    .card-body {
+        height: 80px; /* Adjust the height of the card body */
+        overflow: hidden; /* Hide overflow content */
+    }
+</style>
 
+<div class="container-fluid mb-2 custom-background ">
+    <header class="jumbotron ">
+        <h1 class="display-3 text-center">Welcome to eTrade!</h1>
+        <p class="lead text-center">You find the best products at the best prices.</p>
+    </header>
 
-        <div class="row text-center">
-            {% for product in products %}
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h3>{{ product.subcategory.name }}</h3>
-
-                    <div class="card h-100">
-                        <a href="{% url 'shop:product-detail' product.pk %}">
-                            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title">{{ product.name }}</h4>
-                            <p class="card-text">{{ product.description }}</p>
-                            <p class="card-text">{{ product.price }} Lei</p>
-                        </div>
-                        <div class="card-footer">
-                            <form method="post" action="{% url 'cart:add-to-cart' product.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="product_id" value="{{ product.id }}">
-                                <div class="input-group mb-3">
-                                    <input type="number" name="quantity" class="form-control" value="1" min="1">
-                                    <div class="input-group-append">
-                                        <button class="fa-solid fa-cart-shopping btn btn-primary ms-2"
-                                                type="submit"></button>
-                                    </div>
-                                </div>
-                            </form>
-                            <form method="post" action="{% url 'favorites:add-to-favorite' product.id %}">
-                                {% csrf_token %}
-                                {{ favorite_product_form.quantity }}
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <button class="bi bi-heart btn btn-outline-danger" type="submit"> Add to
-                                            favorites
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    <div class="row text-center mt-2">
+        {% for product in products %}
+        <div class="col-lg-3 col-md-6 mb-3 ">
+            <h4 class="mt-2">{{ product.subcategory.name }}</h4>
+            <div class="card h-100 ">
+                <a href="{% url 'shop:product-detail' product.pk %}">
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title ">{{ product.name }}</h4>
+                    <p class="card-text ">{{ product.description }}</p>
+                    <p class="card-text">{{ product.price }} Lei</p>
                 </div>
-            {% endfor %}
+                <div class="card-footer">
+                    <form method="post" action="{% url 'cart:add-to-cart' product.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <div class="input-group mb-3 mt-2">
+                            <input type="number" name="quantity" class="form-control" value="1" min="1">
+                            <div class="input-group-append">
+                                <button class="fa-solid fa-cart-shopping btn btn-primary ms-2" type="submit"></button>
+                            </div>
+                        </div>
+                    </form>
+                    <form method="post" action="{% url 'favorites:add-to-favorite' product.id %}">
+                        {% csrf_token %}
+                        {{ favorite_product_form.quantity }}
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <button class="bi bi-heart btn btn-outline-danger" type="submit"> Add to favorites
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+        {% endfor %}
     </div>
+</div>
 
 {% endblock %}

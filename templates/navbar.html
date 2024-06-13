@@ -30,12 +30,14 @@
 
             <div class="d-flex align-items-center ms-auto">
                 {% if user.is_authenticated %}
-                    <div class="dropdown ">
-                        <button class="btn btn-outline-primary dropdown-toggle " type="button" id="userDropdown"
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-user "></i>
+                            <i class="fa fa-user"></i>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
+{#                            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>#}
+                           <li><a class="dropdown-item" href="{% url 'user_account:my_account' %}">My Account</a></li>
                             <li>
                                 <form method="post" action="{% url 'logout' %}">
                                     {% csrf_token %}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "order",
     "search",
     "feedback",
+    "user_account"
 
 ]
 

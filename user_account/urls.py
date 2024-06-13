@@ -1,0 +1,13 @@
+from django.urls import path
+
+from user_account import views
+
+urlpatterns = [
+    # Alte URL-uri existente
+    path('account/edit/', views.edit_account, name='account_edit'),
+    path('account/delete/', views.delete_account, name='account_delete'),
+    path('account/orders/', views.order_history, name='order_history'),
+    path('account/', views.my_account, name='my_account'),
+]
+
+app_name = 'user_account'

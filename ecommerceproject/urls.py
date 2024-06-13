@@ -33,6 +33,7 @@ urlpatterns = [
     path("order/", include('order.urls', namespace="order")),
     path("search/", include('search.urls', namespace="search")),
     path("feedback/", include('feedback.urls', namespace="feedback")),
+    path("user_account/", include('user_account.urls', namespace="user_account")),
 
 
 

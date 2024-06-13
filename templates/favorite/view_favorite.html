@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="cart-container" style="max-width: 95%; margin: 0 auto;">
-        <h2 style="text-align: center;">Your favorites products</h2><br/>
+        <h2 class="text-color text-center">Your favorites products</h2><br/>
         {% for item in favorites %}
             <div class="cart-item"
                  style="border: 2px solid #ccc; padding: 30px; margin-bottom: 50px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex;">
@@ -12,7 +12,7 @@
                              style="width: 100px; height: auto;">
                     </a>
                 </div>
-                <div class="cart-item-info" style="flex-grow: 1;">
+                <div class="cart-item-info text-color" style="flex-grow: 1;">
                     <p>Product: {{ item.product.name }}</p>
                     <p>Price per unit: {{ item.product.price }} RON</p>
                     {#            <p>Quantity: <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 50px;"> </p>#}

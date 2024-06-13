@@ -44,6 +44,9 @@
 .color-text:hover{ box-shadow: 0 4px 8px red; /* Add shadow for emphasis */
 
 }
+.text-color{
+    color: white;
+}
 
 /*.custom-search-input .btn {*/
 /*    border: 2px solid #007bff; !* Button border color *!*/
@@ -114,6 +117,7 @@
         justify-content: space-between;
         transition: transform 0.3s, box-shadow 0.3s; /* Add transition for smooth effect */
 
+
     }
      .card:hover {
         transform: translateY(-5px); /* Slightly lift the card */
@@ -128,6 +132,7 @@
 
     .card-body {
         padding: 10px; /* Reduce padding for a more compact look */
+
     }
 
     .card-title {
@@ -142,6 +147,10 @@
         text-align: center;
         padding: 10px; /* Reduce padding for a more compact look */
     }
+
+    .card-background{
+         background-color: red;
+     }
 
 
 

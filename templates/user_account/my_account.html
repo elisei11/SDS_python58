@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+<div class="container fluid">
+    <h2>My Account</h2>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <a href="{% url 'user_account:account_edit' %}" class="btn btn-primary btn-block mb-3">Edit Account</a>
+        </div>
+        <div class="col-md-12 mb-3">
+            <a href="{% url 'user_account:account_delete' %}" class="btn btn-danger btn-block mb-3">Delete Account</a>
+        </div>
+        <div class="col-md-12 mb-3">
+            <a href="{% url 'user_account:order_history' %}" class="btn btn-success btn-block mb-3">Order History</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

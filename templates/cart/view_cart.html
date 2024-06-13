@@ -1,68 +1,73 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="cart-container" style="max-width: 95%; margin: 0 auto;">
-        <h2 style="text-align: center;">Your Cart</h2><br/>
-        {% if cart %}
-            {% for item in cart %}
-                <div class="cart-item"
-                     style="border: 2px solid #ccc; padding: 30px; margin-bottom: 50px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex; transition: transform 0.3s;">
-                    <div class="cart-item-image" style="margin-right: 20px;">
-                        <a href="{% url 'shop:product-detail' item.product.id %}">
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
-                                 style="width: 100px; height: auto;">
-                        </a>
-                    </div>
-                    <div class="cart-item-info" style="flex-grow: 1;">
-                        <p>Product: {{ item.product.name }}</p>
-                        <p>Price per unit: {{ item.product.price }} RON</p>
-                        <form method="post" action="{% url 'cart:update-cart' item.product.id %}" class="update-quantity-form">
+<div class="cart-container" style="max-width: 95%; margin: 0 auto;">
+    <h2 class="text-color text-center">Your Cart</h2><br/>
+    {% if cart %}
+        {% for item in cart %}
+            <div class="cart-item"
+                 style="border: 2px solid #ccc; padding: 30px; margin-bottom: 50px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex; transition: transform 0.3s;">
+                <div class="cart-item-image" style="margin-right: 20px;">
+                    <a href="{% url 'shop:product-detail' item.product.id %}">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                             style="width: 100px; height: auto;">
+                    </a>
+                </div>
+                <div class="cart-item-info text-color" style="flex-grow: 1;">
+                    <p>Product: {{ item.product.name }}</p>
+                    <p>Price per unit: {{ item.product.price }} RON</p>
+                    <form method="post" action="{% url 'cart:update-cart' item.product.id %}" class="update-quantity-form">
+                        {% csrf_token %}
+                        <p>Quantity: <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 60px;" onchange="this.form.submit()">
+                        <input type="hidden" name="override" value="True"></p>
+                    </form>
+                    <p>Total Price for this item: {{ item.total_price }} RON</p>
+                    <div class="cart-item-actions" style="display: flex; gap: 10px;">
+                        <form method="post" action="{% url 'cart:remove-from-cart' item.product.id %}">
                             {% csrf_token %}
-                            <p>Quantity: <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 60px;" onchange="this.form.submit()">
-                            <input type="hidden" name="override" value="True"></p>
+                            <button type="submit" class="btn btn-outline-danger"
+                                    onclick="return confirm('Are you sure you want to remove this item?');">Remove
+                            </button>
                         </form>
-                        <p>Total Price for this item: {{ item.total_price }} RON</p>
-                        <div class="cart-item-actions">
-                            <form method="post" action="{% url 'cart:remove-from-cart' item.product.id %}">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-outline-danger"
-                                        onclick="return confirm('Are you sure you want to remove this item?');">Remove
-                                </button>
-                            </form>
-                        </div>
+                        <form method="post" action="{% url 'favorites:add-to-favorite' item.product.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                            <button class="bi bi-heart btn btn-outline-danger" type="submit">Add to favorites</button>
+                        </form>
                     </div>
                 </div>
-            {% endfor %}
-            <div class="cart-total" style="text-align: center; margin-top: 20px;">
-                <h3>Total Price: {{ cart.get_total_price }} RON</h3>
             </div>
-            <div class="place-order" style="text-align: center; margin-top: 20px;">
-                <a href="{% url 'order:place-order' %}" style="padding: 10px 20px; font-size: 16px;" class="btn btn-outline-success">Place Order</a>
-            </div>
-        {% else %}
-            <p style="text-align: center;">Your cart is empty, start shopping!</p>
-        {% endif %}
-    </div>
+        {% endfor %}
+        <div class="cart-total" style="text-align: center; margin-top: 20px;">
+            <h3>Total Price: {{ cart.get_total_price }} RON</h3>
+        </div>
+        <div class="place-order" style="text-align: center; margin-top: 20px;">
+            <a href="{% url 'order:place-order' %}" style="padding: 10px 20px; font-size: 16px;" class="btn btn-outline-success">Place Order</a>
+        </div>
+    {% else %}
+        <p class="text-color text-center">Your cart is empty, start shopping!</p>
+    {% endif %}
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const forms = document.querySelectorAll('.update-quantity-form');
-            forms.forEach((form) => {
-                form.querySelector('input[name="quantity"]').addEventListener('change', () => {
-                    form.submit();
-                });
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const forms = document.querySelectorAll('.update-quantity-form');
+        forms.forEach((form) => {
+            form.querySelector('input[name="quantity"]').addEventListener('change', () => {
+                form.submit();
             });
         });
+    });
 
-        // Add hover effect
-        const cartItems = document.querySelectorAll('.cart-item');
-        cartItems.forEach((item) => {
-            item.addEventListener('mouseover', () => {
-                item.style.transform = 'scale(1.05)';
-            });
-            item.addEventListener('mouseout', () => {
-                item.style.transform = 'scale(1)';
-            });
+    // Add hover effect
+    const cartItems = document.querySelectorAll('.cart-item');
+    cartItems.forEach((item) => {
+        item.addEventListener('mouseover', () => {
+            item.style.transform = 'scale(1.05)';
         });
-    </script>
+        item.addEventListener('mouseout', () => {
+            item.style.transform = 'scale(1)';
+        });
+    });
+</script>
 {% endblock %}

@@ -1,19 +1,29 @@
+
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Categorii produse{% endblock %}
 
 {% block content %}
     <style>
      body, html {
-        background-image: url("media/images/shopping cart.jpeg");
+        background-image: url("{% static 'images/img.png' %}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
         height: 100%;
+         
+     .jumbotron {
+        background-color: transparent; /* Add a semi-transparent overlay */
+        color: white;
+        padding: 0; /* Adjust padding as needed */
+        width: 50%;
+        margin: 0 auto;
+    }    
     }
     </style>
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-4 custom-background">
         <div class="row">
             {% for category in categories %}
             <div class="col-md-3 mb-3">

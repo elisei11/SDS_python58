@@ -10,4 +10,4 @@ class Feedback(models.Model):
     comment = models.TextField()
     rating = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    dummy_field = models.CharField(max_length=10, default='dummy')
+    # dummy_field = models.CharField(max_length=10, default='dummy')

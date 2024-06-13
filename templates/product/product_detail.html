@@ -30,6 +30,8 @@
                         </div>
                     </div>
                 </form>
+                <a href="{% url 'feedback:create-feedback' product.id %}" class="btn btn-secondary">Give Feedback</a>
+                <a href="{% url 'feedback:view-feedback' product.id %}" class="btn btn-secondary">View Feedbacks</a>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
   <div class="card">
     <div class="card-header">
       <h2>Customer Reviews for {{ product.name }}</h2>
-      <a href="{% url 'create_feedback' product.id %}" class="btn">Leave Feedback</a>
+      <!-- Removed the link for creating feedback -->
     </div>
     <div class="card-body">
       <ul class="feedback-list">
@@ -50,18 +50,6 @@
     }
     .feedback-item {
       margin-bottom: 1em;
-    }
-    .btn {
-      background-color: #007bff;
-      color: white;
-      padding: 0.5em 1em;
-      border: none;
-      border-radius: 4px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .btn:hover {
-      background-color: #0056b3;
     }
     .rating {
       color: #ff9800;

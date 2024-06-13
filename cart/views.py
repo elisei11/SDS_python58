@@ -25,6 +25,16 @@ def view_cart(request):
 
     return render(request, 'cart/view_cart.html', {'cart': cart})
 
+@require_POST
+def update_cart(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    form = AddToCartForm(request.POST)
+    if form.is_valid():
+        quantity = form.cleaned_data['quantity']
+        override = form.cleaned_data['override']
+        cart.add_to_cart(product=product, quantity=quantity, override=override)
+    return redirect('cart:view_cart')
 
 @require_POST
 def remove_from_cart(request, product_id):

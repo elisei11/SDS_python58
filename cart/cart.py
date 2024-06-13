@@ -1,8 +1,6 @@
 from decimal import Decimal
-
 from django.conf import settings
 from shop.models import Product
-
 
 class Cart:
     def __init__(self, request):
@@ -13,14 +11,12 @@ class Cart:
         self.cart = cart
 
     def add_to_cart(self, product, quantity=1, override=False):
-        """ add a product to the cart  or update quantity"""
-
+        """Add a product to the cart or update its quantity."""
         product_id = str(product.id)
         if product_id not in self.cart:
             self.cart[product_id] = {
                 'quantity': 0,
                 'price': str(product.price),
-
             }
         if override:
             self.cart[product_id]['quantity'] = int(quantity)
@@ -56,5 +52,4 @@ class Cart:
         self.save()
 
     def get_total_price(self):
-        return sum(Decimal(item['price'] * item['quantity']) for item in self.cart.values())
-
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())

@@ -7,7 +7,6 @@ urlpatterns = [
     # Alte URL-uri existente
     path('account/edit/', views.edit_account, name='account_edit'),
     path('account/delete/', views.delete_account, name='account_delete'),
-    path('account/orders/', views.order_history, name='order_history'),
     path('account/', views.my_account, name='my_account'),
     path('password_reset/',views.change_password,name='password-reset'),
 

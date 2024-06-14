@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Order History{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-color">Order History</h2>
+    {% if orders %}
+        <div class="row">
+            {% for order in orders %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="card-title">Order #{{ order.id }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ order.created_at }} - {{ order.total_amount }} Lei</p>
+                            <ul class="list-group">
+                                {% for item in order.items.all %}
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 50px; height: auto; margin-right: 10px;">
+                                            <p>{{ item.product.name }} - {{ item.quantity }} x {{ item.price}} Lei</p>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <a class="btn btn-primary" href="{% url 'user_account:my_account' %}">Done</a>
+        </div>
+    {% else %}
+        <p>You have no orders.</p>
+    {% endif %}
+</div>
+{% endblock %}

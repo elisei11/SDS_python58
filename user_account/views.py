@@ -31,10 +31,6 @@ def delete_account(request):
         return redirect('user_account')
     return render(request, 'user_account/delete_account.html')
 
-@login_required
-def order_history(request):
-    orders = Order.objects.filter(user=request.user)
-    return render(request, 'user_account/order_history.html', {'orders': orders})
 
 
 from django.contrib.auth import update_session_auth_hash

@@ -8,7 +8,7 @@
     background: transparent;
     border: 1px solid;
     outline: none;
-    width: 90%;
+    width: 80%;
     height:90%;
     padding: 0;
     margin: 0 12px;
@@ -73,16 +73,16 @@
     margin: 0 auto;
     min-width: 300px; /* Adjust the width as needed */
     max-width: 600px; /* Set a maximum width if necessary */
-    border: 2px solid #ccc;
-    border-radius: 30px; /* Adjust border-radius for rounded ends */
-    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Adjust border-radius for rounded ends */
+    padding: 5px 10px;
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
 
 }
 
 .custom-search-input .btn {
-    border-radius: 50%; /* Make the button round */
+    border-radius: 60%; /* Make the button round */
     border: none; /* Remove border around the button */
 }
 

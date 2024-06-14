@@ -79,4 +79,10 @@ class OrderCreate(View):
     def get(self, request, order_id, *args, **kwargs):
         order = get_object_or_404(Order, id=order_id)
         order_items = order.items.all()
-        return render(request, 'order/order_created.html', {'order': order,'order_items': order_items})  #
+        return render(request, 'order/order_created.html', {'order': order, 'order_items': order_items})  #
+
+
+class OrderHistory(View):
+    def get(self, request, *args, **kwargs):
+        orders = Order.objects.filter(user=request.user)
+        return render(request, 'order/order_history.html', {'orders': orders})

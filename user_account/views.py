@@ -1,10 +1,11 @@
+from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render
 
 # Create your views here.
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import EditAccountForm
+from .forms import EditAccountForm, PasswordChange
 from order.models import Order
 
 @login_required
@@ -35,3 +36,20 @@ def order_history(request):
     orders = Order.objects.filter(user=request.user)
     return render(request, 'user_account/order_history.html', {'orders': orders})
 
+
+from django.contrib.auth import update_session_auth_hash
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import PasswordChange  # Importă formularul tău personalizat
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form_password = PasswordChange(user=request.user, data=request.POST)
+        if form_password.is_valid():
+            user = form_password.save()
+            update_session_auth_hash(request, user)  # Important pentru a menține utilizatorul autentificat
+            return redirect('user_account:my_account')
+    else:
+        form_password = PasswordChange(user=request.user)
+    return render(request, 'user_account/change_password.html', {'form_password': form_password})

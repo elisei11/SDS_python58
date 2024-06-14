@@ -139,3 +139,15 @@ LOGIN_URL = "/login/"  # prefixul url-ului pentru logare
 LOGIN_REDIRECT_URL = "/"  # unde va fi redirectionat utilizatorul dupa autentificare
 LOGOUT_REDIRECT_URL = "/login/"  # unde va fi redirectionat utilizatorul dupa delogare
 #
+# For development (prints emails to the console)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# settings.py
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'eliseiex008@gmail.com'
+# EMAIL_HOST_PASSWORD = 'zx1234cv'
+# DEFAULT_FROM_EMAIL = 'eliseiex008@gmail.com'

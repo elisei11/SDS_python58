@@ -112,6 +112,7 @@ class CreateCustomerView(CreateView):
             # atribui valoarea new_user.first_name.title() campului first_name al obiectului new_user
             new_user.last_name = new_user.last_name.title()
             new_user.save()
+            return super().form_valid(form)
 
 
 # class CartView(ListView):

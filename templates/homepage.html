@@ -50,13 +50,13 @@
 
 
 
-            <div class="row mt-2">
+            <div class="row mt-2 card-custom">
                 {% for subcategory in subcategories %}
                     <div class="col-12">
                         <a href="{% url 'shop:product-list' subcategory.slug %}">
                             <h2 class="mt-4 color-text">{{ subcategory.name }}</h2>
                         </a>
-                        <div class="row">
+                        <div class="row ">
                             {% for product in products %}
                                 {% if product.subcategory == subcategory %}
                                     <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
@@ -104,6 +104,6 @@
                     </div>
                 {% endfor %}
             </div>
-        </div>
-    </div>
+{#        </div>#}
+{#    </div>#}
 {% endblock %}

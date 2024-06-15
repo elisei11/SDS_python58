@@ -1,3 +1,4 @@
+{% load static %}
 {#<style>#}
 {#    .custom-navbar {#}
 {#        background-color: rgba(0, 0, 0, 0.5) !important; /* Replace #333 with your desired color */#}
@@ -8,11 +9,25 @@
 {#    }#}
 {#</style>#}
 
+<style>
+.logo-reformat img{
+    width: 160px;
+    height: 115px;
+    background-color: transparent;
+}
+.logo-reformat:hover{
+     transform: translateY(-5px); /* Slightly lift the card */
+     box-shadow: 0 4px 8px deepskyblue; /* Add shadow for emphasis */;
+}
+</style>
 
 <nav class="navbar navbar-expand-lg ">
     <div class="container-fluid">
-        <h1><a href="{% url 'shop:homepage' %}">eTrade</a></h1> <br/>
-
+    <div class="logo-reformat">
+        <a href="{% url 'shop:homepage' %}">
+      <img src="{% static 'images/Logo1.png' %}">
+        </a>
+    </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

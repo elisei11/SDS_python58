@@ -154,17 +154,24 @@
 .carousel-item img {
     object-fit: fill;
     height: 300px;
-    width: inherit;
+    width: 650px;
 }
 
 /*.custom-background {*/
 /*            height: 100vh;*/
 /*        }*/
+
 /*.carousel-inner {*/
 /*            max-height: 80vh; !* Adjust this value as needed *!*/
+/*            margin-bottom: 450px;*/
 /*        }*/
 /*.carousel-item img {*/
 /*            max-height: 80vh; !* Ensure images do not exceed the container height *!*/
-/*            width: auto; !* Maintain aspect ratio *!*/
-/*            object-fit: cover; !* Ensure images cover the container without distortion *!*/
+/*            width: 650px; !* Maintain aspect ratio *!*/
+/*            object-fit: inherit; !* Ensure images cover the container without distortion *!*/
 /*        }*/
+
+.card-custom{
+    margin-left: 10px;
+
+}

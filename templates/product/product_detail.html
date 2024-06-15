@@ -27,22 +27,23 @@
                         <input type="number" name="quantity" class="form-control" value="1" min="1">
                         <div class="input-group-append">
                             <button class="btn btn-primary ms-2" type="submit">Add to Cart</button>
-
-                            <form method="post" action="{% url 'favorites:add-to-favorite' product.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="product_id" value="{{ product.id }}">
-                                <button class="bi bi-heart btn btn-outline-danger ms-1" type="submit">Add to favorites
-                                </button>
-                            </form>
-                        </div>
-                    </div>
                 </form>
-                <a href="{% url 'feedback:create-feedback' product.id %}" class="btn btn-primary">Give Feedback</a>
-                <a href="{% url 'feedback:view-feedback' product.id %}" class="btn btn-success">View Feedbacks</a>
-
-
             </div>
+            <form method="post" action="{% url 'favorites:add-to-favorite' product.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <button class="bi bi-heart btn btn-outline-danger ms-1" type="submit">Add to favorites
+                </button>
+            </form>
 
         </div>
+
+        <a href="{% url 'feedback:create-feedback' product.id %}" class="btn btn-primary">Give Feedback</a>
+        <a href="{% url 'feedback:view-feedback' product.id %}" class="btn btn-success">View Feedbacks</a>
+
+
+    </div>
+
+    </div>
     </div>
 {% endblock %}

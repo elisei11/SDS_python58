@@ -48,24 +48,7 @@
     color: white;
 }
 
-/*.custom-search-input .btn {*/
-/*    border: 2px solid #007bff; !* Button border color *!*/
-/*    border-radius: 0 30px 30px 0; !* Rounded corners for right side *!*/
-/*    padding: 10px 20px; !* Padding inside the button *!*/
-/*    background-color: #007bff; !* Background color *!*/
-/*    color: white; !* Text color *!*/
-/*    cursor: pointer; !* Pointer cursor on hover *!*/
-/*    transition: background-color 0.3s, border-color 0.3s; !* Smooth transition for hover *!*/
-/*}*/
 
-/*.custom-search-input {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    position: relative;*/
-/*    width: 100%; !* Ensure the container takes full width *!*/
-/*    max-width: 600px; !* Adjust the maximum width as needed *!*/
-/*    margin: 0 auto; !* Center the search bar *!*/
-/*}*/
 
 .custom-search-input .form-control {
     flex-grow: 1;
@@ -96,13 +79,13 @@
     width: 100%; /* Ensure it covers the full width */
 }
 
-.custom-background {
-    background-image: url("media/images/shopping image.jpeg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh; /* Ensure the background covers the whole viewport */
-}
+/*.custom-background {*/
+/*    background-image: url("media/images/shopping image.jpeg");*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+/*    height: 100vh; !* Ensure the background covers the whole viewport *!*/
+/*}*/
 
 /*.custom-background {*/
 /*    background-color: #f0f0f0; !* or any other background color or style *!*/
@@ -152,13 +135,16 @@
          background-color: red;
      }
 
+    body{
+            background: transparent;
+        }
+.background-image {
+            position:fixed;
+            top:0;
+            left:0;
+            min-width: 100vw;
+            z-index:-999;
+        }
 
 
-  body, html {
-        background-image: url("media/images/shopping cart.jpeg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        height: 100%;
-    }
+

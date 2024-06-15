@@ -55,5 +55,3 @@ class Favorites:
         del self.session[settings.FAVORITES_SESSION_ID]
         self.save()
 
-    # def get_total_price(self):
-    #     return sum(Decimal(item['price'] * item['quantity']) for item in self.cart.values())

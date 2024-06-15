@@ -1,49 +1,47 @@
 {% extends "base.html" %}
-
 {% block content %}
     <div class="cart-container" style="max-width: 95%; margin: 0 auto;">
-        <h2 class="text-color text-center">Your favorites products</h2><br/>
-        {% for item in favorites %}
-            <div class="cart-item"
-                 style="border: 2px solid #ccc; padding: 30px; margin-bottom: 50px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex;">
-                <div class="cart-item-image" style="margin-right: 20px;">
-                    <a href="{% url 'shop:product-detail' item.product.pk %}">
-                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
-                             style="width: 100px; height: auto;">
-                    </a>
-                </div>
-                <div class="cart-item-info text-color" style="flex-grow: 1;">
-                    <p>Product: {{ item.product.name }}</p>
-                    <p>Price per unit: {{ item.product.price }} RON</p>
-                    {#            <p>Quantity: <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 50px;"> </p>#}
-
-
-{#                    <p>Total Price for this item: {{ item.product.total_price }} RON</p>#}
-                    <div class="cart-item-actions">
-                        <form method="post" action="{% url 'favorites:remove-from-favorite' item.product.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger ms-2 mb-2"
-                                    onclick="return confirm('Are you sure you want to remove this item?');">Remove
-                            </button>
-                        </form>
-
-                        <form method="post" action="{% url 'cart:add-to-cart' item.product.id %}">
-                            {% csrf_token %}
-                            
-                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
-                            <div class="input-group mb-3">
-                                <input type="hidden" name="quantity" class="form-control" value="1" min="1">
-                                <div class="input-group-append">
-                                    <button class=" fa-solid fa-cart-shopping btn btn-primary ms-2 mb-2"
-                                            type="submit"> Add to cart </button>
-                                </div>
-                            </div>
-                        </form>
+        <h2 class="text-color text-center">Your favorite products</h2><br/>
+        
+           
+            {% for item in favorites %}
+                <div class="cart-item"
+                     style="border: 2px solid #ccc; padding: 30px; margin-bottom: 50px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); display: flex;">
+                    <div class="cart-item-image" style="margin-right: 20px;">
+                        <a href="{% url 'shop:product-detail' item.product.pk %}">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                                 style="width: 100px; height: auto;">
+                        </a>
                     </div>
-
+                    <div class="cart-item-info text-color" style="flex-grow: 1;">
+                        <p>Product: {{ item.product.name }}</p>
+                        <p>Price per unit: {{ item.product.price }} RON</p>
+                        <div class="cart-item-actions">
+                            <form method="post" action="{% url 'favorites:remove-from-favorite' item.product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger ms-2 mb-2"
+                                        onclick="return confirm('Are you sure you want to remove this item?');">Remove
+                                </button>
+                            </form>
+                            <form method="post" action="{% url 'cart:add-to-cart' item.product.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                                <div class="input-group mb-3">
+                                    <input type="hidden" name="quantity" class="form-control" value="1" min="1">
+                                    <div class="input-group-append">
+                                        <button class="fa-solid fa-cart-shopping btn btn-primary ms-2 mb-2"
+                                                type="submit">Add to cart</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-        {% endfor %}
+                {% empty  %}
+              <p class="text-center">You have no favorite products. Start adding some!</p>  
+            {% endfor %}
+        
+            
+        
     </div>
 {% endblock %}

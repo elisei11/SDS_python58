@@ -77,10 +77,26 @@ class PlaceOrderView(View):
 
 class OrderCreate(View):
     def get(self, request, order_id, *args, **kwargs):
-        order = get_object_or_404(Order, id=order_id)
-        order_items = order.items.all()
-        return render(request, 'order/order_created.html', {'order': order, 'order_items': order_items})  #
+        try:
+            order = get_object_or_404(Order, id=order_id)
+            order_items = order.items.all()
+            return render(request, 'order/order_created.html', {'order': order, 'order_items': order_items})
+        except Exception as e:
+            # Log the exception if you want (optional)
+            # import logging
+            # logger = logging.getLogger(__name__)
+            # logger.error(f'Error in OrderCreate view: {e}')
+            # Render an error page or message
+            return render(request, 'order/order_created.html',
+                          {'error_message': 'An error occurred while processing your order. Please try again later.'})
 
+
+# class OrderCreate(View):
+#     def get(self, request, order_id, *args, **kwargs):
+#         order = get_object_or_404(Order, id=order_id)
+#         order_items = order.items.all()
+#         return render(request, 'order/order_created.html', {'order': order, 'order_items': order_items})  #
+#
 
 class OrderHistory(View):
     def get(self, request, *args, **kwargs):

@@ -1,22 +1,49 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.querySelector('.custom-search-input .form-control');
+    console.log("READY")
+    const searchInput = document.getElementById('searchQuery');
 
     searchInput.addEventListener('focus', function() {
-        this.style.minWidth = '300px'; // Adjust width on focus
+        searchInput.style.backgroundColor = 'aqua';
     });
 
     searchInput.addEventListener('blur', function() {
-        this.style.minWidth = '200px'; // Reset width on blur
+        searchInput.style.minWidth = '200px'; // Reset width on blur
     });
 
     searchInput.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             // Perform search operation here, for example:
-            const searchTerm = this.value.trim();
+            const searchTerm = searchInput.value.trim();
             if (searchTerm !== '') {
                 // Redirect to search results page or perform search operation
-                console.log('Searching for:', searchTerm);
+    //             console.log('Searching for:', searchTerm);
             }
         }
     });
+
+    const forms = document.querySelectorAll('.update-quantity-form');
+        forms.forEach((form) => {
+            form.querySelector('input[name="quantity"]').addEventListener('change', () => {
+                form.submit();
+            });
+        });
 });
+
+document.getElementById('searchButton').onclick = function() {
+    let query = document.getElementById('searchQuery').value;
+    const url = window.location.origin +'/search/' + query;
+    window.location.replace(url);
+}
+
+
+
+    // Add hover effect
+    const cartItems = document.querySelectorAll('.cart-item');
+    cartItems.forEach((item) => {
+        item.addEventListener('mouseover', () => {
+            item.style.transform = 'scale(1.05)';
+        });
+        item.addEventListener('mouseout', () => {
+            item.style.transform = 'scale(1)';
+        });
+    });

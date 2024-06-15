@@ -38,7 +38,7 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="cart-total" style="text-align: center; margin-top: 20px;">
+        <div class="cart-total text-color" style="text-align: center; margin-top: 20px;">
             <h3>Total Price: {{ cart.get_total_price }} RON</h3>
         </div>
         <div class="place-order" style="text-align: center; margin-top: 20px;">
@@ -50,24 +50,6 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const forms = document.querySelectorAll('.update-quantity-form');
-        forms.forEach((form) => {
-            form.querySelector('input[name="quantity"]').addEventListener('change', () => {
-                form.submit();
-            });
-        });
-    });
-
-    // Add hover effect
-    const cartItems = document.querySelectorAll('.cart-item');
-    cartItems.forEach((item) => {
-        item.addEventListener('mouseover', () => {
-            item.style.transform = 'scale(1.05)';
-        });
-        item.addEventListener('mouseout', () => {
-            item.style.transform = 'scale(1)';
-        });
-    });
+  
 </script>
 {% endblock %}

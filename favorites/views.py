@@ -30,13 +30,7 @@ def add_to_favorites(request, product_id):
 
 def view_favorites(request):
     favorites = Favorites(request)
-    # for product in favorites:
-    #     product['update_quantity'] = AddToFavorites(initial={'quantity': product['quantity'], 'override': True})
-
     return render(request, 'favorite/view_favorite.html', {'favorites': favorites})
-
-
-
 
 
 @require_POST

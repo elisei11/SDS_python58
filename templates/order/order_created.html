@@ -1,14 +1,43 @@
-{% extends 'base.html' %}
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block content %}#}
+{#<div class="container">#}
+{#    <h2>Order Created</h2>#}
+{#    <p>Thank you for your order! Your order ID is {{ order.id }}.</p>#}
+{#    <p>Total Amount: {{ order.total_amount }} RON</p>#}
+{#    <ul>#}
+{#        {% for item in order.items.all %}#}
+{#            <li>{{ item.product.name }} - {{ item.quantity }} x {{ item.price }} RON</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#</div>#}
+{#{% endblock %}#}
 
+
+{% extends 'base.html' %}
 {% block content %}
-<div class="container">
-    <h2>Order Created</h2>
-    <p>Thank you for your order! Your order ID is {{ order.id }}.</p>
-    <p>Total Amount: {{ order.total_amount }} RON</p>
-    <ul>
-        {% for item in order.orderitem_set.all %}
-            <li>{{ item.product.name }} - {{ item.quantity }} x {{ item.price }} RON</li>
-        {% endfor %}
-    </ul>
-</div>
+    <div class="container text-color">
+        <h2>Order Created</h2>
+        {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+        {% else %}
+            <p>Thank you for your order! Your order ID is {{ order.id }}.</p>
+            <p>Total Amount: {{ order.total_amount }} RON</p>
+            <ul>
+                {% for item in order.items.all %}
+                    <li>
+                        <div class="d-flex align-items-center">
+                            <a href="{% url 'shop:product-detail' item.product.id %}">
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                                     style="width: 50px; height: auto; margin-right: 10px;">
+                            </a>
+                            <span>{{ item.product.name }} - {{ item.quantity }} x {{ item.price }} RON</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 {% endblock %}

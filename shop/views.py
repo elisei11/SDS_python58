@@ -32,9 +32,11 @@ class HomeView(ListView):
     def get(self, request, *args, **kwargs):
         subcategories = Subcategory.objects.all()
         products = Product.objects.all()
+        featured_products = Product.objects.filter(favorite=True)
         context = {
             'subcategories': subcategories,
-            'products': products
+            'products': products,
+            'featured_products': featured_products,
         }
         return render(request, 'homepage.html', context)
 

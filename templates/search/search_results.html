@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container fluid">
-    <h2>Search Results for "{{ query }}"</h2>
+    <h2 class="text-center text-color">Search Results for "{{ query }}"</h2>
 
     <h3>Products</h3>
     <div class="row">
@@ -39,7 +39,7 @@
                 <p class="card-text">{{ subcategory.description }}</p>
             </div>
             <div class="card-footer">
-{#                <a href="{% url 'shop:product-list' subcategory.slug %}" class="btn btn-primary">View Subcategory</a>#}
+                <a href="{% url 'shop:product-list' subcategory.slug %}" class="btn btn-primary">View Subcategory</a>
             </div>
         </div>
     </div>

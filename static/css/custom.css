@@ -172,7 +172,7 @@
 .carousel-item img {
     object-fit: fill;
     height: 300px;
-    width: 650px;
+    width: 800px;
 }
 
 /*.custom-background {*/
@@ -197,3 +197,7 @@
 .remove-underline{
     text-decoration: none !important;
 }
+
+.row.d-flex.flex-row-reverse.flex-wrap {
+      flex-direction: row !important;
+  }

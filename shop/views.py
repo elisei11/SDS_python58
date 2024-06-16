@@ -30,7 +30,8 @@ class HomeView(ListView):
         return context
 
     def get(self, request, *args, **kwargs):
-        subcategories = Subcategory.objects.all()
+        relevant_categories = ["Tricouri", "Shoes", "Tools"]
+        subcategories = Subcategory.objects.filter(name__in=relevant_categories)
         products = Product.objects.all()
         featured_products = Product.objects.filter(favorite=True)
         context = {

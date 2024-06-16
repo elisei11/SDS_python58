@@ -4,20 +4,20 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="my-4">Subcategories in {{ category.name }}</h1>
+    <h1 class="my-4 text-color" >{{ category.name }}</h1>
     <div class="row">
         {% for subcategory in subcategories %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100 subcategory-card">
                     {% if subcategory.image %}
-                       <a href="{% url 'shop:product-list' subcategory.slug %}">
+                       <a  href="{% url 'shop:product-list' subcategory.slug %}">
                         <img src="{{ subcategory.image.url }}" class="card-img-top img-fluid" alt="{{ subcategory.name }}">
                        </a>
                     {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ subcategory.name }}</h5>
+{#                    <div class="card-body">#}
+                        <h5 class="card-title text-center">{{ subcategory.name }}</h5>
 {#                        <a href="{% url 'shop:product-list' subcategory.slug %}" class="btn btn-primary">View Products</a>#}
-                    </div>
+{#                    </div>#}
                 </div>
             </div>
         {% endfor %}

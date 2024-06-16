@@ -91,30 +91,47 @@
 /*    background-color: #f0f0f0; !* or any other background color or style *!*/
 /*    padding: 20px; }*/
 
- .card {!important;
-        width: 100%; /* Set the width of the card */
+ /*.card {!important;*/
+ /*       width: 60%; !* Set the width of the card *!*/
+ /*       margin-bottom: 10px; !* Reduce margin to prevent excessive spacing *!*/
+ /*       height: 50px;*/
+ /*       display: flex;*/
+ /*       flex-direction: column;*/
+ /*       justify-content: space-between;*/
+ /*       transition: transform 0.3s, box-shadow 0.3s; !* Add transition for smooth effect *!*/
+
+
+ /*   }*/
+
+    .card {
+        width: 60%; /* Set the width of the card */
+        min-width: 200px; /* Minimum width to prevent the card from becoming too small */
+        max-width: 600px; /* Maximum width to prevent the card from becoming too large */
         margin-bottom: 10px; /* Reduce margin to prevent excessive spacing */
-        height: auto;
+        height: 20vh;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         transition: transform 0.3s, box-shadow 0.3s; /* Add transition for smooth effect */
 
 
-    }
+
+}
+
      .card:hover {
         transform: translateY(-5px); /* Slightly lift the card */
-        box-shadow: 0 4px 8px red; /* Add shadow for emphasis */
+        box-shadow: 0 4px 8px #390404; /* Add shadow for emphasis */
     }
 
     .card-img-top {
         width: 100%; /* Set the width of the image */
-        height: 250px; /* Set a fixed height for the image */
-        object-fit: contain; /* Contain the image without cropping */
+        height: 170px; /* Set a fixed height for the image */
+        object-fit: fill; /* Contain the image without cropping */
     }
 
     .card-body {
-        padding: 10px; /* Reduce padding for a more compact look */
+        padding: 10px;
+        /* Reduce padding for a more compact look */
 
     }
 
@@ -128,7 +145,8 @@
 
     .card-footer {
         text-align: center;
-        padding: 10px; /* Reduce padding for a more compact look */
+        padding: 10px;
+        /* Reduce padding for a more compact look */
     }
 
     .card-background{
@@ -174,4 +192,8 @@
 .card-custom{
     margin-left: 10px;
 
+
+}
+.remove-underline{
+    text-decoration: none !important;
 }

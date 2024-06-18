@@ -5,7 +5,7 @@
 <div class="container fluid">
     <h2 class="text-center text-color">Search Results for "{{ query }}"</h2>
 
-    <h3>Products</h3>
+{#    <h3>Products</h3>#}
     <div class="row">
         {% for product in products %}
         <div class="col-lg-3 col-md-6 mb-4 ">
@@ -23,10 +23,11 @@
                 </div>
             </div>
         </div>
+           
         {% endfor %}
     </div>
 
-    <h3>Subcategories</h3>
+{#    <h3>Subcategories</h3>#}
 <div class="row">
     {% for subcategory in subcategories %}
     <div class="col-lg-3 col-md-6 mb-4">
@@ -43,8 +44,10 @@
             </div>
         </div>
     </div>
+        
     {% endfor %}
 </div>
 </div>
 
 {% endblock %}
+

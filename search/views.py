@@ -8,7 +8,7 @@ from shop.models import Product, Subcategory
 
 def search_results(request, query_string):
     query = query_string.lower()
-    if query:
+    if query :
         products = Product.objects.filter(name__icontains=query)
         subcategories = Subcategory.objects.filter(name__icontains=query)
     else:

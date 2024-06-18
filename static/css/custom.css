@@ -69,7 +69,6 @@
     border: none; /* Remove border around the button */
 }
 
-
 .jumbotron-background {
     background-image: url(" static/images/img.png") !important;
     background-size: cover;
@@ -161,6 +160,7 @@
             top:0;
             left:0;
             min-width: 100vw;
+            min-height: 100vh;
             z-index:-999;
         }
 
@@ -201,3 +201,14 @@
 .row.d-flex.flex-row-reverse.flex-wrap {
       flex-direction: row !important;
   }
+
+
+.logo-reformat img{
+    width: 160px;
+    height: 115px;
+    background-color: transparent;
+}
+.logo-reformat:hover{
+     transform: translateY(-5px); /* Slightly lift the card */
+     box-shadow: 0 4px 8px deepskyblue; /* Add shadow for emphasis */;
+}

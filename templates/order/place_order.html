@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h2>Place Order</h2>
-    <form method="post" action="{% url 'order:place-order' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Continue to Payment</button>
-    </form>
-</div>
+    <div class="container-fluid justify-content-center align-items-center vh-100 text-color ">
+        <div class="row ">
+            <div class="col-md-6 offset-md-3">
+                <div class="border p-4 order_custom ">
+                    <h2 class="text-center">Place Order</h2>
+                    <form method="post" action="{% url 'order:place-order' %}" class="w-40">
+                        {% csrf_token %}
+                        <div class="custom-form">
+                        {{ form.as_p }}
+                        </div>
+                        <button type="submit" class="btn btn-primary d-block mx-auto">Continue to Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

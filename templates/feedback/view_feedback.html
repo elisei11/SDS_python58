@@ -3,60 +3,79 @@
 {% block title %}Feedback for {{ product.name }}{% endblock %}
 
 {% block content %}
-  <div class="card">
-    <div class="card-header">
-      <h2>Customer Reviews for {{ product.name }}</h2>
-      <!-- Removed the link for creating feedback -->
-    </div>
-    <div class="card-body">
-      <ul class="feedback-list">
-        {% for feedback in feedbacks %}
-          <li class="feedback-item">
-            <div class="card">
-              <div class="card-body">
-                <strong>{{ feedback.user.username }}:</strong>
-                <span>{{ feedback.comment }}</span>
-                <div class="rating">Rating: {{ feedback.rating }}</div>
-                <div class="timestamp">Posted on: {{ feedback.created_at }}</div>
-              </div>
+    <div class="container-fluid justify-content-center align-items-center vh-100 text-color">
+        <div class="row ">
+            <div class="col-md-12 offset-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Customer Reviews for {{ product.name }}</h2>
+                        <div class=" d-flex justify-content-center align-items-center">
+                            <a href="{% url 'shop:product-detail' product.id %}">
+                                <img src="{{ product.image.url }}"
+                                     alt="{{product.name }}"
+                                     style="width: 50px; height: auto; margin-right: 10px;">
+                            </a>
+                        </div>
+                        <!-- Removed the link for creating feedback -->
+                    </div>
+                    <div class="custom-body">
+                        <ul class="feedback-list">
+                            {% for feedback in feedbacks %}
+                                <li class="feedback-item">
+                                    <div class="card">
+                                        <div class="custom-body">
+                                            <strong>{{ feedback.user.username }}:</strong>
+                                            <span>{{ feedback.comment }}</span>
+                                            
+                                            <div class="rating">Rating: {{ feedback.rating }}</div>
+                                            <div class="timestamp">Posted on: {{ feedback.created_at }}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
-          </li>
-        {% endfor %}
-      </ul>
+        </div>
     </div>
-  </div>
 {% endblock %}
 
 {% block extra_css %}
-  <style>
-    .card {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin: 1em 0;
-      padding: 1em;
-    }
-    .card-header {
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 1em;
-      margin-bottom: 1em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .feedback-list {
-      list-style-type: none;
-      padding: 0;
-    }
-    .feedback-item {
-      margin-bottom: 1em;
-    }
-    .rating {
-      color: #ff9800;
-    }
-    .timestamp {
-      color: #757575;
-      font-size: 0.8em;
-    }
-  </style>
+    <style>
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 1em 0;
+            padding: 1em;
+        }
+
+        .card-header {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1em;
+            margin-bottom: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .feedback-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feedback-item {
+            margin-bottom: 1em;
+        }
+
+        .rating {
+            color: #ff9800;
+        }
+
+        .timestamp {
+            color: #757575;
+            font-size: 0.8em;
+        }
+    </style>
 {% endblock %}

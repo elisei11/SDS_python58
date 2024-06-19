@@ -134,6 +134,20 @@
 
     }
 
+   .custom-body {
+    padding: 1.25rem;
+    background-color: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+}
+
+
+
+
     .card-title {
         font-size: 1rem; /* Reduce the font size */
     }
@@ -174,7 +188,9 @@
     height: 300px;
     width: 800px;
 }
-
+.carousel-fix-height .carousel-inner .carousel-item img {
+        border-radius: 15px; /* Rotunjirea colțurilor la 15px */
+    }
 /*.custom-background {*/
 /*            height: 100vh;*/
 /*        }*/
@@ -211,4 +227,17 @@
 .logo-reformat:hover{
      transform: translateY(-5px); /* Slightly lift the card */
      box-shadow: 0 4px 8px deepskyblue; /* Add shadow for emphasis */;
+}
+
+.login_and_sign_up-custom:hover{
+     transform: translateY(-5px); /* Slightly lift the card */
+     box-shadow: 0 4px 8px bisque; /* Add shadow for emphasis */
+
+
+}
+
+.order_custom:hover{
+    transform: translateY(-5px); /* Slightly lift the card */
+    box-shadow: 0 4px 8px bisque; /* Add shadow for emphasis */
+
 }

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
@@ -25,7 +26,7 @@ from shop.models import Product
 #     model = Feedback
 #     form_class = FeedbackForm
 #     success_url = reverse_lazy('home')
-
+@login_required
 def create_feedback(request, product_id):
     product = get_object_or_404(Product, pk=product_id)  # Retrieve the product instance
     if request.method == 'POST':

@@ -130,6 +130,7 @@
 
     .card-body {
         padding: 10px;
+
         /* Reduce padding for a more compact look */
 
     }
@@ -177,6 +178,14 @@
             min-height: 100vh;
             z-index:-999;
         }
+/*.custom-card-login{*/
+/*    padding: 20px;*/
+/*    width: 100%;*/
+/*    max-width: 500px;*/
+/*    margin: auto;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    border-radius: 8px;*/
+/*}*/
 
 
 
@@ -205,11 +214,11 @@
 /*            object-fit: inherit; !* Ensure images cover the container without distortion *!*/
 /*        }*/
 
-.card-custom{
-    margin-left: 10px;
+/*.card-custom{*/
+/*    margin-left: 10px;*/
 
 
-}
+/*}*/
 .remove-underline{
     text-decoration: none !important;
 }

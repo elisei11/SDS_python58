@@ -3,10 +3,10 @@
 {% block title %}Submit Feedback{% endblock %}
 
 {% block content %}
-    <div class="container-fluid justify-content-center align-items-center vh-100 text-color">
+    <div class="container-fluid justify-content-center align-items-center  text-color">
         <div class="row ">
-            <div class="col-md-12 offset-md-3">
-                <div class="card">
+            <div class="col-md-7 offset-md-4">
+                <div class="card ">
 {#                    <div class="card-header">#}
                         <h2 class="text-center">Submit Feedback for {{ product.name }}</h2>
                         <div class=" d-flex justify-content-center align-items-center">
@@ -16,15 +16,17 @@
                                      style="width: 50px; height: auto; margin-right: 10px;">
                             </a>
                         </div>
-                    <div class="custom-body ">
+{#                </div>#}
                         <form method="post">
                             {% csrf_token %}
+                            <div class="custom-body">
                             {{ form.as_p }}
+                                </div>
                             <div class="text-center">
                             <button type="submit" class="btn btn-primary ">Submit</button>
                                 </div>
                         </form>
-                    </div>
+                    
                 </div>
             </div>
         </div>

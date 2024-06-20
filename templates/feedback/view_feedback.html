@@ -5,9 +5,9 @@
 {% block content %}
     <div class="container-fluid justify-content-center align-items-center vh-100 text-color">
         <div class="row ">
-            <div class="col-md-12 offset-md-3">
+            <div class="col-md-7 offset-md-4">
                 <div class="card">
-                    <div class="card-header">
+{#                    <div class="card-header">#}
                         <h2>Customer Reviews for {{ product.name }}</h2>
                         <div class=" d-flex justify-content-center align-items-center">
                             <a href="{% url 'shop:product-detail' product.id %}">
@@ -17,7 +17,7 @@
                             </a>
                         </div>
                         <!-- Removed the link for creating feedback -->
-                    </div>
+{#                    </div>#}
                     <div class="custom-body">
                         <ul class="feedback-list">
                             {% for feedback in feedbacks %}

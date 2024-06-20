@@ -250,3 +250,8 @@
     box-shadow: 0 4px 8px bisque; /* Add shadow for emphasis */
 
 }
+
+.my_account_custom:hover{
+    transform: translateY(-5px); /* Slightly lift the card */
+    box-shadow: 0 4px 8px bisque; /* Add shadow for emphasis */
+}

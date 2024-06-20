@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container-fluid justify-content-center align-items-center vh-100 text-color">
         <div class="row ">
-            <div class="col-md-12 offset-md-4">
+            <div class="col-md-12 offset-md-3">
                 <div class="card">
                     <div class="card-header">
                         <h2>Customer Reviews for {{ product.name }}</h2>
@@ -41,41 +41,41 @@
     </div>
 {% endblock %}
 
-{% block extra_css %}
-    <style>
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin: 1em 0;
-            padding: 1em;
-        }
-
-        .card-header {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 1em;
-            margin-bottom: 1em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .feedback-list {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .feedback-item {
-            margin-bottom: 1em;
-        }
-
-        .rating {
-            color: #ff9800;
-        }
-
-        .timestamp {
-            color: #757575;
-            font-size: 0.8em;
-        }
-    </style>
-{% endblock %}
+{#{% block extra_css %}#}
+{#    <style>#}
+{#        .card {#}
+{#            border: 1px solid #ddd;#}
+{#            border-radius: 8px;#}
+{#            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);#}
+{#            margin: 1em 0;#}
+{#            padding: 1em;#}
+{#        }#}
+{##}
+{#        .card-header {#}
+{#            border-bottom: 1px solid #ddd;#}
+{#            padding-bottom: 1em;#}
+{#            margin-bottom: 1em;#}
+{#            display: flex;#}
+{#            justify-content: space-between;#}
+{#            align-items: center;#}
+{#        }#}
+{##}
+{#        .feedback-list {#}
+{#            list-style-type: none;#}
+{#            padding: 0;#}
+{#        }#}
+{##}
+{#        .feedback-item {#}
+{#            margin-bottom: 1em;#}
+{#        }#}
+{##}
+{#        .rating {#}
+{#            color: #ff9800;#}
+{#        }#}
+{##}
+{#        .timestamp {#}
+{#            color: #757575;#}
+{#            font-size: 0.8em;#}
+{#        }#}
+{#    </style>#}
+{#{% endblock %}#}

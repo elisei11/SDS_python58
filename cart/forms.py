@@ -16,4 +16,3 @@ class AddToCartForm(forms.Form):
             max_choices = MAX_QUANTITY_CHOICES
         self.fields['quantity'].choices = MAX_QUANTITY_CHOICES
 
-

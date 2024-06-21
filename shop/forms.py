@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-from .models import Category, CartItem
+# from .models import Category, CartItem
 
 
 # class CategoryForm(forms.ModelForm):
@@ -57,9 +57,7 @@ class UserForm(UserCreationForm):
 
 
 
-class AddToCartForm(forms.Form):
-    product_id = forms.IntegerField(widget=forms.HiddenInput)
-    quantity = forms.IntegerField(min_value=1, initial=1)
+
 
 class AddToFavoriteForm(forms.Form):
     product_id = forms.IntegerField(widget=forms.HiddenInput())

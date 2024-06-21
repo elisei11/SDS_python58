@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-from .cart import Cart
-from .forms import AddToCartForm
+
 from shop.models import Product
+from .cart import Cart
+from cart.forms import AddToCartForm
 
 
 # Create your views here.
@@ -25,6 +26,7 @@ def view_cart(request):
 
     return render(request, 'cart/view_cart.html', {'cart': cart})
 
+
 @require_POST
 def update_cart(request, product_id):
     cart = Cart(request)
@@ -35,6 +37,7 @@ def update_cart(request, product_id):
         override = form.cleaned_data['override']
         cart.add_to_cart(product=product, quantity=quantity, override=override)
     return redirect('cart:view_cart')
+
 
 @require_POST
 def remove_from_cart(request, product_id):

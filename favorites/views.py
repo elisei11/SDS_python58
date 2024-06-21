@@ -1,30 +1,15 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
-
-# Create your views here.
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-from django.views.generic import DeleteView
 
+from shop.models import Product
 from .favorites import Favorites
 
-from shop.models import Product, Favorite
-
-
-# Create your views here.
 
 @require_POST
 def add_to_favorites(request, product_id):
     favorites = Favorites(request)
     product = get_object_or_404(Product, pk=product_id)
-
-    # print(request.POST)
-    # if form.is_valid():
-    #     print(form.cleaned_data)
-    #     cleaned_data = form.cleaned_data
     favorites.add_to_favorites(product=product)
-    # print(form.errors)
     return redirect('favorites:view_favorite')
 
 

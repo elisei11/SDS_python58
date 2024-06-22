@@ -1,4 +1,5 @@
 import stripe
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.views.generic import View
@@ -20,7 +21,7 @@ import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
-class PlaceOrderView(View):
+class PlaceOrderView(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
         form = OrderForm()
         return render(request, 'order/place_order.html', {'form': form})

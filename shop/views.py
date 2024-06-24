@@ -5,7 +5,7 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView
 
 from cart.forms import AddToCartForm
 from cart.models import CartItem, Cart
-from .forms import UserForm, AddToFavoriteForm
+from favorites.forms import AddToFavoriteForm
 from .models import Category, Product, Subcategory
 
 
@@ -82,22 +82,6 @@ class ProductDetailView(DetailView):
         return self.get(request, *args, **kwargs)
 
 
-class CreateCustomerView(CreateView):
-    template_name = 'customer/create_customer.html'
-    model = User
-    form_class = UserForm
-    success_url = reverse_lazy('login')
-
-    def form_valid(self, form):
-        if form.is_valid():
-            new_user = form.save(commit=False)
-
-            # customizare first_name si last_name
-            new_user.first_name = new_user.first_name.title()
-            # atribui valoarea new_user.first_name.title() campului first_name al obiectului new_user
-            new_user.last_name = new_user.last_name.title()
-            new_user.save()
-            return super().form_valid(form)
 
 
 #

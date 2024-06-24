@@ -1,11 +1,15 @@
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.models import User
 from django.shortcuts import render
 
 # Create your views here.
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import EditAccountForm, PasswordChange
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
+from .forms import EditAccountForm, PasswordChange, UserForm
 from order.models import Order
 
 @login_required
@@ -28,7 +32,7 @@ def edit_account(request):
 def delete_account(request):
     if request.method == 'POST':
         request.user.delete()
-        return redirect('user_account')
+        return redirect('user_account:my_account')
     return render(request, 'user_account/delete_account.html')
 
 
@@ -49,3 +53,21 @@ def change_password(request):
     else:
         form_password = PasswordChange(user=request.user)
     return render(request, 'user_account/change_password.html', {'form_password': form_password})
+
+
+class CreateCustomerView(CreateView):
+    template_name = 'customer/create_customer.html'
+    model = User
+    form_class = UserForm
+    success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        if form.is_valid():
+            new_user = form.save(commit=False)
+
+            # customizare first_name si last_name
+            new_user.first_name = ''.join([char for char in new_user.first_name if char.isalpha()]).title()
+            new_user.last_name = ''.join([char for char in new_user.last_name if char.isalpha()]).title()
+
+            new_user.save()
+            return super().form_valid(form)

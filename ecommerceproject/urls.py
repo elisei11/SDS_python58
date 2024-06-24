@@ -21,7 +21,7 @@ from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from shop.forms import AuthenticationNewForm
+from user_account.forms import AuthenticationNewForm
 
 urlpatterns = [
     path("admin/", admin.site.urls),

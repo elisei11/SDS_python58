@@ -29,7 +29,7 @@
                                     onclick="return confirm('Are you sure you want to remove this item?');">Remove
                             </button>
                         </form>
-                        <form method="post" action="{% url 'favorites:add-to-favorite' item.product.id %}">
+                        <form class="add-to-favorites" method="post" action="{% url 'favorites:add-to-favorite' item.product.id %}">
                             {% csrf_token %}
                             <input type="hidden" name="product_id" value="{{ item.product.id }}">
                             <button class="bi bi-heart btn btn-outline-danger" type="submit">Add to favorites</button>

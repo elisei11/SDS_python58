@@ -18,8 +18,8 @@
 
 
     <header class="jumbotron">
-        <h1 class="display-3 text-center ">Welcome to eTrade!</h1>
-        <p class="lead text-center">You find the best products at the best prices.</p>
+        <h1 class="display-3 text-center text-color">Welcome to eTrade!</h1>
+        <p class="lead text-center text-color">You find the best products at the best prices.</p>
     </header>
 
     <div class="container-fluid mb-2 custom-background d-flex justify-content-center align-items-center">
@@ -75,7 +75,7 @@
                                         <p class="card-text">{{ product.price }} Lei</p>
                                     </div>
                                     <div>
-                                        <form method="post" action="{% url 'cart:add-to-cart' product.id %}">
+                                        <form class="add-to-cart" method="post" action="{% url 'cart:add-to-cart' product.id %}">
                                             {% csrf_token %}
                                             <input type="hidden" name="product_id" value="{{ product.id }}">
                                             <div class="input-group mb-3 mt-2">
@@ -87,13 +87,13 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <form method="post"
+                                        <form  class="add-to-favorites" method="post"
                                               action="{% url 'favorites:add-to-favorite' product.id %}">
                                             {% csrf_token %}
                                             {{ favorite_product_form.quantity }}
                                             <div class="input-group mb-3">
                                                 <div class="input-group-append">
-                                                    <button class="bi bi-heart btn btn-outline-danger"
+                                                    <button class="bi bi-heart btn btn-outline-danger ms-2"
                                                             type="submit"> Add to favorites
                                                     </button>
                                                 </div>

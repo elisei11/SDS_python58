@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
@@ -10,7 +11,8 @@ def add_to_favorites(request, product_id):
     favorites = Favorites(request)
     product = get_object_or_404(Product, pk=product_id)
     favorites.add_to_favorites(product=product)
-    return redirect('favorites:view_favorite')
+    return JsonResponse({'status': 'success','button':'favorites'})
+    # return JsonResponse({'status': 'error'}, status=400)
 
 
 def view_favorites(request):

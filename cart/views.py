@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
@@ -16,7 +17,8 @@ def add_to_cart(request, product_id):
     if form.is_valid():
         cleaned_data = form.cleaned_data
         cart.add_to_cart(product=product, quantity=cleaned_data['quantity'], override=cleaned_data['override'])
-    return redirect('cart:view_cart')
+        return JsonResponse({'status': 'success','button':'cart'})
+    return JsonResponse({'status': 'error'}, status=400)
 
 
 def view_cart(request):

@@ -167,9 +167,9 @@
          background-color: red;
      }
 
-    body{
-            background: transparent;
-        }
+    /*body{*/
+    /*        background: transparent;*/
+    /*    }*/
 .background-image {
             position:fixed;
             top:0;
@@ -177,6 +177,8 @@
             min-width: 100vw;
             min-height: 100vh;
             z-index:-999;
+
+
         }
 /*.custom-card-login{*/
 /*    padding: 20px;*/
@@ -255,3 +257,53 @@
     transform: translateY(-5px); /* Slightly lift the card */
     box-shadow: 0 4px 8px bisque; /* Add shadow for emphasis */
 }
+
+
+/* Stiluri de tranziție */
+body {
+    transition: background-color 0.5s, color 0.5s;
+
+}
+
+/* Teme definite folosind variabile CSS */
+:root[data-theme="light"] {
+    --background-color: lightgray;
+    --text-color: black;
+}
+
+:root[data-theme="dark"] {
+    --background-color: #121212;
+    --text-color: white;
+}
+
+/* Aplicarea temelor */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Buton de schimbare a temei */
+#theme-toggle {
+    padding: 7px 15px;
+    /*border: none;*/
+    /*background-color: d;*/
+    color: yellow;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#theme-toggle:hover {
+    background-color: darkcyan;
+}
+
+/*stelute pentru buton*/
+
+.stars {
+    font-size: 10px;
+    color: gold;
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+}
+

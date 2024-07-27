@@ -24,7 +24,7 @@
                                 <li>Stock: {{ product.stock }}</li>
                             </ul>
 
-                            <form method="post" action="{% url 'cart:add-to-cart' product.id %}" class="mb-3">
+                            <form class="add-to-cart" method="post" action="{% url 'cart:add-to-cart' product.id %}" class="mb-3">
                                 {% csrf_token %}
                                 <input type="hidden" name="product_id" value="{{ product.id }}">
                                 <div class="input-group mb-3">
@@ -34,7 +34,7 @@
                             </form>
 
                             <div class="d-flex  ">
-                                <form method="post" action="{% url 'favorites:add-to-favorite' product.id %}" class="me-2">
+                                <form class="add-to-favorites" method="post" action="{% url 'favorites:add-to-favorite' product.id %}" class="me-2">
                                     {% csrf_token %}
                                     <input type="hidden" name="product_id" value="{{ product.id }}">
                                     <button class="bi bi-heart btn btn-danger " type="submit">Add to Favorites</button>
